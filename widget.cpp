@@ -17,17 +17,18 @@ Widget::Widget(QWidget *parent)
 
 
 {	
-	ADD_EMPLOYEE = new QPushButton(QString::fromLocal8Bit("&ADD_EMPLOYEE добавить сотрудника"));
-	DEL_EMPLOYEE = new QPushButton(QString::fromLocal8Bit("&DEL_EMPLOYEE удалить сотрудника"));
-	CHANGE_POSITION = new QPushButton(QString::fromLocal8Bit("&CHANGE_POSITION изменить тип сотрудника"));
-	ASSOCIATE_EMPLOYEE = new QPushButton(QString::fromLocal8Bit("&привязывать сотрудника к менеджеру"));
-	SORT_LASTNAME = new QPushButton(QString::fromLocal8Bit("&сортировать список по фамилиям"));
-	SORT_DATE = new QPushButton(QString::fromLocal8Bit("&сортировать датам принятия на работу"));
-	PRINT_EMPLYEES_LIST = new QPushButton(QString::fromLocal8Bit("&PRINT_EMPLYEES_LISTвывести список работников"));
-	GET_LIST_ASSOCIATE = new QPushButton(QString::fromLocal8Bit("&вывести список работников привязаных к менеджеру"));
-	EXIT = new QPushButton(QString::fromLocal8Bit("&Выход"));
+	
+	btnAddEmployee = new QPushButton(QString::fromLocal8Bit("&добавить сотрудника"));
+	btnDelEmployee = new QPushButton(QString::fromLocal8Bit("&удалить сотрудника"));
+	btnChangePosition = new QPushButton(QString::fromLocal8Bit("&изменить тип сотрудника"));
+	btnAssociateEmployee = new QPushButton(QString::fromLocal8Bit("&привязывать сотрудника к менеджеру"));
+	btnSortLastname = new QPushButton(QString::fromLocal8Bit("&сортировать список по фамилиям"));
+	btnSortDate = new QPushButton(QString::fromLocal8Bit("&сортировать датам принятия на работу"));
+	btnPrintEmployeeList = new QPushButton(QString::fromLocal8Bit("&вывести список работников"));
+	btnGetListAssociate = new QPushButton(QString::fromLocal8Bit("&вывести список работников привязаных к менеджеру"));
+	btnExit = new QPushButton(QString::fromLocal8Bit("&Выход"));
 
-	QObject::connect(PRINT_EMPLYEES_LIST, &QPushButton::clicked, this, &Widget::PRINT_EMPLYEES_LISTBtnClicked);
+	QObject::connect(btnAssociateEmployee, &QPushButton::clicked, this, &Widget::PrintEmployeeList);
 
 
 
@@ -50,21 +51,21 @@ Widget::Widget(QWidget *parent)
 	//Layout setup
 	pvbxLayout = new QVBoxLayout;
 	pvbxLayout->addWidget(tbl);
-	pvbxLayout->addWidget(ADD_EMPLOYEE);
-	pvbxLayout->addWidget(DEL_EMPLOYEE);
-	pvbxLayout->addWidget(CHANGE_POSITION);
-	pvbxLayout->addWidget(ASSOCIATE_EMPLOYEE);
-	pvbxLayout->addWidget(SORT_LASTNAME);
-	pvbxLayout->addWidget(SORT_DATE);
-	pvbxLayout->addWidget(PRINT_EMPLYEES_LIST);
-	pvbxLayout->addWidget(GET_LIST_ASSOCIATE);
-	pvbxLayout->addWidget(EXIT);
+	pvbxLayout->addWidget(btnAddEmployee);
+	pvbxLayout->addWidget(btnDelEmployee);
+	pvbxLayout->addWidget(btnChangePosition);
+	pvbxLayout->addWidget(btnAssociateEmployee);
+	pvbxLayout->addWidget(btnSortLastname);
+	pvbxLayout->addWidget(btnSortDate);
+	pvbxLayout->addWidget(btnPrintEmployeeList);
+	pvbxLayout->addWidget(btnGetListAssociate);
+	pvbxLayout->addWidget(btnExit);
 	setLayout(pvbxLayout);
 
 	File2 ftemp;
 
 	ftemp.ReadEmplyeesList(company2);
-	PRINT_EMPLYEES_LISTBtnClicked();
+	PrintEmployeeList();
 }
 
 Widget::~Widget()
@@ -72,11 +73,11 @@ Widget::~Widget()
 
 }
 
-void Widget::PRINT_EMPLYEES_LISTBtnClicked()
+void Widget::PrintEmployeeList()
 {
 	{
 		QStringList lst;
-		lst << QString::fromLocal8Bit("Имяnnn") << QString::fromLocal8Bit("Фамилия");
+		lst << QString::fromLocal8Bit("Имя") << QString::fromLocal8Bit("Фамилия");
 
 		tbl->setHorizontalHeaderLabels(lst);
 	}

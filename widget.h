@@ -25,15 +25,15 @@ class Widget : public QWidget
 	Q_OBJECT
 
 private:
-	QPushButton* ADD_EMPLOYEE; // btnAddEmployee
-	QPushButton* DEL_EMPLOYEE;
-	QPushButton* CHANGE_POSITION;
-	QPushButton* ASSOCIATE_EMPLOYEE;
-	QPushButton* SORT_LASTNAME;
-	QPushButton* SORT_DATE;
-	QPushButton* PRINT_EMPLYEES_LIST;
-	QPushButton* GET_LIST_ASSOCIATE;
-	QPushButton* EXIT;
+	QPushButton* btnAddEmployee; // btnAddEmployee
+	QPushButton* btnDelEmployee;
+	QPushButton* btnChangePosition;
+	QPushButton* btnAssociateEmployee;
+	QPushButton* btnSortLastname;
+	QPushButton* btnSortDate;
+	QPushButton* btnPrintEmployeeList;
+	QPushButton* btnGetListAssociate;
+	QPushButton* btnExit;
 	const int n = 6;
 	QTableWidget*      tbl;//(const int n = 5, const int m = 5);
 //	QTableWidgetItem* ptwi = 0;
@@ -44,10 +44,10 @@ public:
 	~Widget();
 
 private Q_SLOTS:
-	void PRINT_EMPLYEES_LISTBtnClicked();
+	void PrintEmployeeList();
 
 Q_SIGNALS:
-	void calculatedNewResult(QString result);
+	
 
 private:
 	Company2 company2;
