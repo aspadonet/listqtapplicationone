@@ -29,6 +29,7 @@ void Company2::AddEmployeeFromFile(Employee2* empl)
 	
 }
 
+
 void Company2::DeleteEmployee(std::string lastName)
 {
 	
