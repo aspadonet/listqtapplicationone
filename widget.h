@@ -18,13 +18,14 @@
 #include <QtWidgets>
 #include <QWidget>
 #include <QTableWidget>
+#include "Company.h"
 
 class Widget : public QWidget
 {
-
 	Q_OBJECT
+
 private:
-	QPushButton* ADD_EMPLOYEE;
+	QPushButton* ADD_EMPLOYEE; // btnAddEmployee
 	QPushButton* DEL_EMPLOYEE;
 	QPushButton* CHANGE_POSITION;
 	QPushButton* ASSOCIATE_EMPLOYEE;
@@ -35,18 +36,21 @@ private:
 	QPushButton* EXIT;
 	const int n = 6;
 	QTableWidget*      tbl;//(const int n = 5, const int m = 5);
-	QTableWidgetItem* ptwi = 0;
-	QStringList lst;
+//	QTableWidgetItem* ptwi = 0;
+//	QStringList lst;
 	QVBoxLayout* pvbxLayout;
 public:
 	Widget(QWidget *parent = 0);
 	~Widget();
+
 private Q_SLOTS:
 	void PRINT_EMPLYEES_LISTBtnClicked();
-	
 
 Q_SIGNALS:
 	void calculatedNewResult(QString result);
+
+private:
+	Company2 company2;
 };
 
 #endif // WIDGET_H
