@@ -1,0 +1,15 @@
+Рабочий Ivanov Ivan Ivanovich 1985.05.12 2000.05.08
+Менеджер Petrov Ivan Nikolaevich 1965.01.12 2010.02.22
+Рабочий Sokolova Svetlana Sergeevna 1985.07.19 2005.01.06
+Менеджер Bobrov Ivan Ivanovich 1956.02.13 2012.06.08
+open Associate An Employee With Bobrov
+Рабочий Toropyshka Natalja Ivanovna 1995.11.06 2011.10.03
+Close Associate An Employee With Bobrov
+Рабочий Toropyshka Natalja Ivanovna 1995.11.06 2011.10.03
+Директор Sidozvogr Nikolaj Petrovich 1933.09.17 2016.03.04
+open Associate An Employee With Sidozvogr
+Менеджер Petrov Ivan Nikolaevich 1965.01.12 2010.02.22
+Менеджер Bobrov Ivan Ivanovich 1956.02.13 2012.06.08
+Close Associate An Employee With Sidozvogr
+Уборщик Siskina Nina Olegovna 1997.05.16 2016.04.08
+Рабочий Burzhin Petr Kovanovich 1991.11.11 2013.11.13
