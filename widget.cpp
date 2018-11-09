@@ -24,15 +24,15 @@ Widget::Widget(QWidget *parent)
 
 	ftemp.ReadEmplyeesList(company2);
 
-	ADD_EMPLOYEE = new QPushButton(tr("&ADD_EMPLOYEE добавить сотрудника"));
-	DEL_EMPLOYEE = new QPushButton("&DEL_EMPLOYEE удалить сотрудника");
-	CHANGE_POSITION = new QPushButton("&CHANGE_POSITION изменить тип сотрудника");
-	ASSOCIATE_EMPLOYEE = new QPushButton("&привязывать сотрудника к менеджеру");
-	SORT_LASTNAME = new QPushButton("&сортировать список по фамилиям");
-	SORT_DATE = new QPushButton("&сортировать датам принятия на работу");
-	PRINT_EMPLYEES_LIST = new QPushButton("&PRINT_EMPLYEES_LISTвывести список работников");
-	GET_LIST_ASSOCIATE = new QPushButton("&вывести список работников привязаных к менеджеру");
-	EXIT = new QPushButton("&Выход");
+	ADD_EMPLOYEE = new QPushButton(QString::fromLocal8Bit("&ADD_EMPLOYEE добавить сотрудника"));
+	DEL_EMPLOYEE = new QPushButton(QString::fromLocal8Bit("&DEL_EMPLOYEE удалить сотрудника"));
+	CHANGE_POSITION = new QPushButton(QString::fromLocal8Bit("&CHANGE_POSITION изменить тип сотрудника"));
+	ASSOCIATE_EMPLOYEE = new QPushButton(QString::fromLocal8Bit("&привязывать сотрудника к менеджеру"));
+	SORT_LASTNAME = new QPushButton(QString::fromLocal8Bit("&сортировать список по фамилиям"));
+	SORT_DATE = new QPushButton(QString::fromLocal8Bit("&сортировать датам принятия на работу"));
+	PRINT_EMPLYEES_LIST = new QPushButton(QString::fromLocal8Bit("&PRINT_EMPLYEES_LISTвывести список работников"));
+	GET_LIST_ASSOCIATE = new QPushButton(QString::fromLocal8Bit("&вывести список работников привязаных к менеджеру"));
+	EXIT = new QPushButton(QString::fromLocal8Bit("&Выход"));
 	QObject::connect(PRINT_EMPLYEES_LIST, &QPushButton::clicked, this, &Widget::PRINT_EMPLYEES_LISTBtnClicked);
 
 
