@@ -76,7 +76,7 @@ void Widget::PRINT_EMPLYEES_LISTBtnClicked()
 {
 	{
 		QStringList lst;
-		lst << QString::fromLocal8Bit("Èìÿ") << QString::fromLocal8Bit("Ôàìèëèÿ");
+		lst << QString::fromLocal8Bit("Èìÿnnn") << QString::fromLocal8Bit("Ôàìèëèÿ");
 
 		tbl->setHorizontalHeaderLabels(lst);
 	}
