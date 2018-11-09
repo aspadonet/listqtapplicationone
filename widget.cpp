@@ -29,7 +29,7 @@ Widget::Widget(QWidget *parent)
 	btnExit = new QPushButton(QString::fromLocal8Bit("&Выход"));
 
 	QObject::connect(btnAssociateEmployee, &QPushButton::clicked, this, &Widget::PrintEmployeeList);
-
+	QObject::connect(btnAddEmployee, &QPushButton::clicked, this, &Widget::AddEmployee);
 
 
 	//lst << "First" << "Second" << "Third" << "Second" << "Third";
@@ -73,28 +73,70 @@ Widget::~Widget()
 
 }
 
+void Widget::AddEmployee()
+{
+	QWidget widgetAddEmployee;
+
+	widgetAddEmployee.resize(100,100);
+	widgetAddEmployee.show();
+
+
+
+}
+void Widget::DelEmployee()
+{}
+void Widget::ChangePosition()
+{}
+void Widget::AssociateEmployee()
+{}
+void Widget::SortLastname()
+{}
+void Widget::SortDate()
+{}
+void Widget::GetListAssociate()
+{}
 void Widget::PrintEmployeeList()
 {
 	{
 		QStringList lst;
-		lst << QString::fromLocal8Bit("Имя") << QString::fromLocal8Bit("Фамилия");
+		lst << QString::fromLocal8Bit("Должность")
+			<< QString::fromLocal8Bit("Фамилия")
+			<< QString::fromLocal8Bit("Имя")
+			<< QString::fromLocal8Bit("Отчество")
+			<< QString::fromLocal8Bit("Дата рождения")
+			<< QString::fromLocal8Bit("Дата устройство на работу");
 
 		tbl->setHorizontalHeaderLabels(lst);
 	}
 
 	std::vector< Employee2* > emplyeesVec = company2.GetEmployees();
 
-	tbl->setColumnCount(2);
+	tbl->setColumnCount(6);
 	tbl->setRowCount(emplyeesVec.size());
 
 	QTableWidgetItem* ptwi = nullptr;
 
 	for (int i = 0; i < emplyeesVec.size(); ++i) {
 
-		ptwi = new QTableWidgetItem(QString::fromStdString( emplyeesVec[i]->GetFirstName() ) );
+		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetPositionName()));
 		tbl->setItem(i, 0, ptwi);
 
 		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetLastName()));
 		tbl->setItem(i, 1, ptwi);
+
+		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetFirstName()));
+		tbl->setItem(i, 2, ptwi);
+
+		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetPatronymic()));
+		tbl->setItem(i, 3, ptwi);
+
+		ptwi = new QTableWidgetItem(QString::fromStdString( emplyeesVec[i]->GetDateOfBirth() ) );
+		tbl->setItem(i, 4, ptwi);
+
+		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetDateOfHiring()));
+		tbl->setItem(i, 5, ptwi);
 	}
+
+	
+	
 }

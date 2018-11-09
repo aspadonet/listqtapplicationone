@@ -45,12 +45,20 @@ public:
 
 private Q_SLOTS:
 	void PrintEmployeeList();
+	void AddEmployee();
+	void DelEmployee();
+	void ChangePosition();
+	void AssociateEmployee();
+	void SortLastname();
+	void SortDate();
+	void GetListAssociate();
 
 Q_SIGNALS:
 	
 
 private:
 	Company2 company2;
+	
 };
 
 #endif // WIDGET_H
