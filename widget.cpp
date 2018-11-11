@@ -2,9 +2,13 @@
 #include <QtWidgets>
 #include "stdafx.h"
 
+#include "utils.h"
+
 #include "Employee.h"
 #include "File.h"
 #include "Position.h"
+
+#include "EmployeeDialog.h"
 
 #include <iostream>
 #include <iomanip>
@@ -75,14 +79,22 @@ Widget::~Widget()
 
 void Widget::AddEmployee()
 {
-	QWidget widgetAddEmployee;
-
+	EmployeeDialog widgetAddEmployee;
 	widgetAddEmployee.resize(100,100);
-	widgetAddEmployee.show();
 
+	int res = widgetAddEmployee.exec();
+	long sdf = 789;
 
+//	if (QDialog::Rejected == widgetAddEmployee.exec())
+//		return;
 
+//	Employee2* emp = widgetAddEmployee.getEmploee();
+//	company2.AddEmployee( emp );
+
+//	widgetAddEmployee.leName.getText();
+//	Employee2 emp = widgetAddEmployee.getEmploee();
 }
+
 void Widget::DelEmployee()
 {}
 void Widget::ChangePosition()
@@ -99,7 +111,7 @@ void Widget::PrintEmployeeList()
 {
 	{
 		QStringList lst;
-		lst << QString::fromLocal8Bit("Должность")
+		lst << toQtString("Должность")
 			<< QString::fromLocal8Bit("Фамилия")
 			<< QString::fromLocal8Bit("Имя")
 			<< QString::fromLocal8Bit("Отчество")
@@ -117,8 +129,12 @@ void Widget::PrintEmployeeList()
 	QTableWidgetItem* ptwi = nullptr;
 
 	for (int i = 0; i < emplyeesVec.size(); ++i) {
+//		std::string stdStr = emplyeesVec[i]->GetPositionName();
+//		const char* cStr = stdStr.c_str();
+//
+//		QString qStr = QString::fromLocal8Bit(cStr);
 
-		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetPositionName()));
+		ptwi = new QTableWidgetItem(toQtString(emplyeesVec[i]->GetPositionName()));
 		tbl->setItem(i, 0, ptwi);
 
 		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetLastName()));

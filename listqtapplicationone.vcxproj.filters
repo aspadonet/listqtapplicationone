@@ -28,6 +28,9 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Source Files\EployeeDialog">
+      <UniqueIdentifier>{4e946865-be02-4d2d-819f-9b1819649341}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +57,9 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EmployeeDialog.cpp">
+      <Filter>Source Files\EployeeDialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="listqtapplicationone.qrc">
@@ -63,6 +69,9 @@
   <ItemGroup>
     <QtMoc Include="widget.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="EmployeeDialog.h">
+      <Filter>Source Files\EployeeDialog</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +91,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
