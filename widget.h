@@ -19,6 +19,7 @@
 #include <QWidget>
 #include <QTableWidget>
 #include "Company.h"
+#include "EmploeesTableWidget.h"
 
 class Widget : public QWidget
 {
@@ -34,12 +35,16 @@ private:
 	QPushButton* btnPrintEmployeeList;
 	QPushButton* btnGetListAssociate;
 	QPushButton* btnExit;
+	QMenu* menu = nullptr;
 	const int n = 6;
 	QTableWidget*      tbl;//(const int n = 5, const int m = 5);
+//	EmploeesTableWidget* tbl;
 //	QTableWidgetItem* ptwi = 0;
 //	QStringList lst;
 	QVBoxLayout* pvbxLayout;
 	File2 ftemp;
+
+
 public:
 	Widget(QWidget *parent = 0);
 	~Widget();

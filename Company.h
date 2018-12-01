@@ -14,6 +14,7 @@ public:
 	void AddEmployee(Employee2* empl);
 	void AddEmployeeFromFile(Employee2* empl);
 	std::vector< Employee2* > GetEmployees();
+	// std::vector< Employee2* > GetLeaderEmployees();
 	void DeleteEmployee(std::string lastName);
 	void DeleteEmployee2(std::string lastName);
 	void DeleteEmployeFromLeaders(Employee2* empl);

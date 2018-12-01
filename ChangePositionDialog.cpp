@@ -1,6 +1,8 @@
 #include "ChangePositionDialog.h"
 //#include "Company.h"
-//#include "utils.h"
+
+#include "utils.h"
+
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets>
@@ -145,7 +147,7 @@ Position* ChangePositionDialog::getPositionName()
 	return pos;
 }
 
-QString ChangePositionDialog::toQtString(const std::string& s)
+/*QString ChangePositionDialog::toQtString(const std::string& s)
 {
 	return QString::fromLocal8Bit(s.c_str());
-}
+}*/

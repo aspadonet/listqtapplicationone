@@ -22,7 +22,7 @@ private:
 	QLabel* plblPatronymic;
 	QLineEdit* plePatronymic;
 	QLabel* plblDateOfBirth;
-	QLineEdit* pleDateOfBirth;
+	QDateEdit* pleDateOfBirth;
 	QLabel* plblDateOfHiring;
 	QLineEdit* pleDateOfHiring;
 	QPushButton* okBtn;

@@ -84,6 +84,12 @@
     <ClCompile Include="GetListAssociateAnEmployeeWithAManagerDialog.cpp">
       <Filter>Source Files\GetListAssociateAnEmployeeWithAManagerDialog</Filter>
     </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EmploeesTableWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="listqtapplicationone.qrc">
@@ -131,6 +137,9 @@
     </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EmploeesTableWidget.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

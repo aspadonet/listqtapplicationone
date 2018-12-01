@@ -1,6 +1,7 @@
+#include "stdafx.h"
+
 #include "widget.h"
 #include <QtWidgets>
-#include "stdafx.h"
 
 #include "utils.h"
 
@@ -12,7 +13,7 @@
 #include "DeleteEmployeeDialog.h"
 #include "ChangePositionDialog.h"
 #include "AssociateAnEmployeeWithAManagerDialog.h"
-#include "GetListAssociateAnEmployeeWithAManagerDialog.h";
+#include "GetListAssociateAnEmployeeWithAManagerDialog.h"
 
 #include <iostream>
 #include <iomanip>
@@ -64,8 +65,7 @@ Widget::Widget(QWidget *parent)
 
 	//Layout setup
 	pvbxLayout = new QVBoxLayout;
-
-	pvbxLayout->addWidget(tbl);
+    pvbxLayout->addWidget(tbl);
 	pvbxLayout->addWidget(btnAddEmployee);
 	pvbxLayout->addWidget(btnDelEmployee);
 	pvbxLayout->addWidget(btnChangePosition);
@@ -181,6 +181,7 @@ void Widget::GetListAssociate()
 {
 	std::vector< Employee2* > employees = company2.GetEmployees();
 	
+	// LeaderEmplyeeChooseDialog 
 	GetListAssociateAnEmployeeWithAManagerDialog widgetGetListAssociateAnEmployeeWithAManagerDialog(employees);
 	
 	widgetGetListAssociateAnEmployeeWithAManagerDialog.resize(100, 110);
@@ -191,6 +192,11 @@ void Widget::GetListAssociate()
 	std::string lastNameManager = widgetGetListAssociateAnEmployeeWithAManagerDialog.getLastNameManager();
 	
 	LeaderBehavior* leader = company2.FindLeaderEmployeeByLastName(lastNameManager);
+	if (!leader)
+	{
+//		MsgBox
+		return;
+	}
 
 	{
 		QStringList lst;
@@ -206,6 +212,24 @@ void Widget::GetListAssociate()
 	}
 
 	auto submissed = leader->getSubmissed();
+
+//	QEmplyeeListDlg dlg(submissed);
+//	dlg.exec();
+
+	QDialog submissedDlg;
+	
+	EmploeesTableWidget* submissedTbl = new EmploeesTableWidget(submissed, &submissedDlg);
+	
+	QVBoxLayout* layout = new QVBoxLayout();
+	layout->addWidget(submissedTbl);
+
+	submissedDlg.setLayout(layout);
+
+	submissedDlg.exec();
+
+	return;
+
+
 
 	tbl->setColumnCount(6);
 

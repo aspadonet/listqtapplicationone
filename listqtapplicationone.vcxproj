@@ -18,7 +18,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -117,6 +117,7 @@
     <ClCompile Include="ChangePositionDialog.cpp" />
     <ClCompile Include="Company.cpp" />
     <ClCompile Include="DeleteEmployeeDialog.cpp" />
+    <ClCompile Include="EmploeesTableWidget.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="EmployeeDialog.cpp" />
     <ClCompile Include="File.cpp" />
@@ -127,6 +128,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="utils.cpp" />
     <ClCompile Include="widget.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -147,6 +149,7 @@
     <QtMoc Include="DeleteEmployeeDialog.h">
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_USING_V110_SDK71_</Define>
     </QtMoc>
+    <ClInclude Include="EmploeesTableWidget.h" />
     <ClInclude Include="Employee.h" />
     <QtMoc Include="GetListAssociateAnEmployeeWithAManagerDialog.h">
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_USING_V110_SDK71_</Define>

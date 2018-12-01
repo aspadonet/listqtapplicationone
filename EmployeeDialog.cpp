@@ -3,6 +3,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets>
+#include "utils.h"
 
 EmployeeDialog::EmployeeDialog(QWidget* parent)
 {
@@ -33,7 +34,7 @@ EmployeeDialog::EmployeeDialog(QWidget* parent)
 
 	plblDateOfBirth = new QLabel(QString::fromLocal8Bit("Дата рождения"));
 
-	pleDateOfBirth = new QLineEdit;
+	pleDateOfBirth = new QDateEdit;
 
 	plblDateOfHiring = new QLabel(QString::fromLocal8Bit("Дата устройство на работу"));
 
@@ -129,7 +130,7 @@ void EmployeeDialog::onOk()
 	
 	std::string patronymic = qstr.toStdString();
 	
-	qstr = pleDateOfBirth->text();
+	qstr = pleDateOfBirth->date().toString();
 	
 	std::string dateOfBirth = qstr.toStdString();
 	
