@@ -31,6 +31,18 @@
     <Filter Include="Source Files\EployeeDialog">
       <UniqueIdentifier>{4e946865-be02-4d2d-819f-9b1819649341}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DeleteEmployeeDialog">
+      <UniqueIdentifier>{c2ca394e-1d9c-468d-8b36-bdd35eee4f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ChangePositionDialog">
+      <UniqueIdentifier>{00ab4462-bf8a-4b72-a9c5-7c7d12bc03d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AssociateAnEmployeeWithAManagerDialog">
+      <UniqueIdentifier>{7b95a5bf-6170-41b9-95fb-0da93028656a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GetListAssociateAnEmployeeWithAManagerDialog">
+      <UniqueIdentifier>{86a0d711-e55e-4118-a29d-bed34a376751}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,6 +72,18 @@
     <ClCompile Include="EmployeeDialog.cpp">
       <Filter>Source Files\EployeeDialog</Filter>
     </ClCompile>
+    <ClCompile Include="DeleteEmployeeDialog.cpp">
+      <Filter>Source Files\DeleteEmployeeDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangePositionDialog.cpp">
+      <Filter>Source Files\ChangePositionDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="AssociateAnEmployeeWithAManagerDialog.cpp">
+      <Filter>Source Files\AssociateAnEmployeeWithAManagerDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="GetListAssociateAnEmployeeWithAManagerDialog.cpp">
+      <Filter>Source Files\GetListAssociateAnEmployeeWithAManagerDialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="listqtapplicationone.qrc">
@@ -72,6 +96,18 @@
     </QtMoc>
     <QtMoc Include="EmployeeDialog.h">
       <Filter>Source Files\EployeeDialog</Filter>
+    </QtMoc>
+    <QtMoc Include="DeleteEmployeeDialog.h">
+      <Filter>Source Files\DeleteEmployeeDialog</Filter>
+    </QtMoc>
+    <QtMoc Include="ChangePositionDialog.h">
+      <Filter>Source Files\ChangePositionDialog</Filter>
+    </QtMoc>
+    <QtMoc Include="AssociateAnEmployeeWithAManagerDialog.h">
+      <Filter>Source Files\AssociateAnEmployeeWithAManagerDialog</Filter>
+    </QtMoc>
+    <QtMoc Include="GetListAssociateAnEmployeeWithAManagerDialog.h">
+      <Filter>Source Files\GetListAssociateAnEmployeeWithAManagerDialog</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

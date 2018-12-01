@@ -18,7 +18,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -113,10 +113,14 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssociateAnEmployeeWithAManagerDialog.cpp" />
+    <ClCompile Include="ChangePositionDialog.cpp" />
     <ClCompile Include="Company.cpp" />
+    <ClCompile Include="DeleteEmployeeDialog.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="EmployeeDialog.cpp" />
     <ClCompile Include="File.cpp" />
+    <ClCompile Include="GetListAssociateAnEmployeeWithAManagerDialog.cpp" />
     <ClCompile Include="listfirm2.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -133,8 +137,20 @@
     <QtRcc Include="listqtapplicationone.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="AssociateAnEmployeeWithAManagerDialog.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_USING_V110_SDK71_</Define>
+    </QtMoc>
+    <QtMoc Include="ChangePositionDialog.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_USING_V110_SDK71_</Define>
+    </QtMoc>
     <ClInclude Include="Company.h" />
+    <QtMoc Include="DeleteEmployeeDialog.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_USING_V110_SDK71_</Define>
+    </QtMoc>
     <ClInclude Include="Employee.h" />
+    <QtMoc Include="GetListAssociateAnEmployeeWithAManagerDialog.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_USING_V110_SDK71_</Define>
+    </QtMoc>
     <ClInclude Include="utils.h" />
     <QtMoc Include="EmployeeDialog.h" />
     <ClInclude Include="File.h" />

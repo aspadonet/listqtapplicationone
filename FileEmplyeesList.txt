@@ -13,3 +13,4 @@ open Associate An Employee With Sidozvogr
 Close Associate An Employee With Sidozvogr
 Уборщик Siskina Nina Olegovna 1997.05.16 2016.04.08
 Рабочий Burzhin Petr Kovanovich 1991.11.11 2013.11.13
+Рабочий wert wsx cde 1955.11.22 1988.11.01

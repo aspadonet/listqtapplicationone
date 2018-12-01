@@ -11,3 +11,5 @@ QString toQtString(const std::string& s)
 {
 	return QString::fromLocal8Bit(s.c_str());
 }
+
+

@@ -39,6 +39,7 @@ private:
 //	QTableWidgetItem* ptwi = 0;
 //	QStringList lst;
 	QVBoxLayout* pvbxLayout;
+	File2 ftemp;
 public:
 	Widget(QWidget *parent = 0);
 	~Widget();
@@ -52,6 +53,7 @@ private Q_SLOTS:
 	void SortLastname();
 	void SortDate();
 	void GetListAssociate();
+	void ExitList();
 
 Q_SIGNALS:
 	
