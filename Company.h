@@ -15,22 +15,22 @@ public:
 	void AddEmployeeFromFile(Employee2* empl);
 	std::vector< Employee2* > GetEmployees();
 	// std::vector< Employee2* > GetLeaderEmployees();
-	void DeleteEmployee(std::string lastName);
-	void DeleteEmployee2(std::string lastName);
+	void DeleteEmployee(QString lastName);
+	void DeleteEmployee2(QString lastName);
 	void DeleteEmployeFromLeaders(Employee2* empl);
-	void ChangePosition(std::string lastName, Position* pos);
-	void AssociateAnEmployeeWithAManager(std::string lastNameManager, std::string lastName);
-	void GetListAssociateAnEmployeeWithAManager(std::string lastNameManager);
+	void ChangePosition(QString lastName, Position* pos);
+	void AssociateAnEmployeeWithAManager(QString lastNameManager, QString lastName);
+	void GetListAssociateAnEmployeeWithAManager(QString lastNameManager);
 	void SortTheListByLastName();
 	void SortTheListByDateOfHiring();
 	bool EmployeeMatchCheck(Employee2* empl);
 	//void setAllLeaders();
-	std::vector<Employee2*>::const_iterator FindEmployeeByLastName(const std::string& lastName);
+	std::vector<Employee2*>::const_iterator FindEmployeeByLastName(const QString& lastName);
 	std::vector<Employee2*>::const_iterator FindEmployeeByDateOfHiring(const std::string& DateOfHiring);
 	std::vector< LeaderBehavior* >  getAllLeaders();
 
-  Employee2* FindEmployeeByLastName2( const std::string& lastName );
-  LeaderBehavior* FindLeaderEmployeeByLastName( const std::string& lastName );
+  Employee2* FindEmployeeByLastName2( const QString& lastName );
+  LeaderBehavior* FindLeaderEmployeeByLastName( const QString& lastName );
 
   int GetEmployeesCount();
 
@@ -45,7 +45,7 @@ public:
    void PrintSubmissedList(LeaderBehavior* leader );
 
 	void PrintEmplyeesListBySortLastName(std::vector<Employee2*>  Employee2);
-	void PrintReportRow(const std::string& pos, const std::string& lastName, const std::string& firstName, const std::string& patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring);
+	void PrintReportRow(const std::string& pos, const QString& lastName, const std::string& firstName, const std::string& patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring);
 	std::string AscEmployeLast();
 	std::string AscManagerLast();
 	Position* ComponyConsole::AscPosition();

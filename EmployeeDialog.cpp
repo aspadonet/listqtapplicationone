@@ -120,10 +120,8 @@ void EmployeeDialog::onOk()
 	}
 	
 	QString qstr;
-	
-	qstr= pleLastName->text();
-	
-	std::string lastName = qstr.toStdString();
+		
+	QString lastName = pleLastName->text();
 	
 	qstr = pleFirstName->text();
 	
@@ -141,7 +139,7 @@ void EmployeeDialog::onOk()
 	
 	std::string dateOfHiring = qstr.toStdString();
 
-	if (lastName.empty() || firstName.empty() || patronymic.empty() || dateOfBirth.empty() || dateOfHiring.empty())
+	if (lastName.isEmpty() || firstName.empty() || patronymic.empty() || dateOfBirth.empty() || dateOfHiring.empty())
 	{
 		
 		QMessageBox msgBox;

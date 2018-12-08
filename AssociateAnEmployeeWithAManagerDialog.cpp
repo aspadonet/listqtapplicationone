@@ -28,7 +28,7 @@ AssociateAnEmployeeWithAManagerDialog::AssociateAnEmployeeWithAManagerDialog(std
 		Employee2* emp2 = *it;
 
 		QString PositionName = toQtString(emp2->GetPositionName());
-		QString LastName = toQtString(emp2->GetLastName());
+		QString LastName = emp2->GetLastName();
 		QString FirstName = toQtString(emp2->GetFirstName());
 		QString Patronymic = toQtString(emp2->GetPatronymic());
 		QString DateOfBirth = toQtString(emp2->GetDateOfBirth());
@@ -48,7 +48,7 @@ AssociateAnEmployeeWithAManagerDialog::AssociateAnEmployeeWithAManagerDialog(std
 		Employee2* emp2 = *it;
 
 		QString PositionName = toQtString(emp2->GetPositionName());
-		QString LastName = toQtString(emp2->GetLastName());
+		QString LastName = emp2->GetLastName();
 		QString FirstName = toQtString(emp2->GetFirstName());
 		QString Patronymic = toQtString(emp2->GetPatronymic());
 		QString DateOfBirth = toQtString(emp2->GetDateOfBirth());
@@ -103,7 +103,7 @@ void AssociateAnEmployeeWithAManagerDialog::onAdd()
 		wordsVector.push_back(word);
 	}
 
-	lastNameManager = wordsVector[1];
+	lastNameManager = toQtString(wordsVector[1]);
 
 	std::string word2;
 	
@@ -122,17 +122,17 @@ void AssociateAnEmployeeWithAManagerDialog::onAdd()
 		wordsVector2.push_back(word2);
 	}
 	
-	lastName = wordsVector2[1];
+	lastName = toQtString(wordsVector2[1]);
 	
 	accept();
 }
 
-std::string AssociateAnEmployeeWithAManagerDialog::getLastNameManager()
+QString AssociateAnEmployeeWithAManagerDialog::getLastNameManager()
 {
 	return lastNameManager;
 }
 
-std::string AssociateAnEmployeeWithAManagerDialog::getLastName()
+QString AssociateAnEmployeeWithAManagerDialog::getLastName()
 {
 	return lastName;
 }

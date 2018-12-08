@@ -25,21 +25,18 @@ GetListAssociateAnEmployeeWithAManagerDialog::GetListAssociateAnEmployeeWithAMan
 		Employee2* emp2 = *it;
 
 		QString PositionName = toQtString(emp2->GetPositionName());
-		QString LastName = toQtString(emp2->GetLastName());
+		QString LastName = emp2->GetLastName();
 		QString FirstName = toQtString(emp2->GetFirstName());
 		QString Patronymic = toQtString(emp2->GetPatronymic());
 		QString DateOfBirth = toQtString(emp2->GetDateOfBirth());
 		QString DateOfHiring = toQtString(emp2->GetDateOfHiring());
 		
 		QString result = PositionName + " " + LastName + " " + FirstName + " " + Patronymic + " " + DateOfBirth + " " + DateOfHiring;
-		
-		lst << result;
 
+		cboEmployee->addItem(result, LastName);
 	}
 	
-	cboEmployee->addItems(lst);
-	
-	canselBtn = new QPushButton("Cansel");
+	canselBtn = new QPushButton("Cancel");
 
 	okBtn = new QPushButton("Ok");
 
@@ -57,29 +54,11 @@ GetListAssociateAnEmployeeWithAManagerDialog::GetListAssociateAnEmployeeWithAMan
 
 void GetListAssociateAnEmployeeWithAManagerDialog::onOk()
 {
-	std::string word;
-
-	QString qstrcboEmployee;
-	
-	qstrcboEmployee = cboEmployee->currentText();
-	
-	std::string str = qstrcboEmployee.toLocal8Bit().constData();
-	
-	std::istringstream iss(str, std::istringstream::in);
-	
-	std::vector<std::string> wordsVector;
-	
-	while (iss >> word)
-	{
-		wordsVector.push_back(word);
-	}
-
-	lastNameManager = wordsVector[1];
-	
+	lastNameManager = cboEmployee->currentData().toString();
 	accept();
 }
 
-std::string GetListAssociateAnEmployeeWithAManagerDialog::getLastNameManager()
+QString GetListAssociateAnEmployeeWithAManagerDialog::getLastNameManager()
 {
 	return lastNameManager;
 }

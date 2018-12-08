@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Position.h"
+#include <QString>
 
 class LeaderBehavior;
 
@@ -10,7 +11,7 @@ class Employee2
 protected:
 	Position* Pos = nullptr;
 	LeaderBehavior* LeaderBeh = nullptr;
-	std::string LastName;
+	QString LastName;
 	std::string FirstName;
 	std::string Patronymic;
 	std::string DateOfBirth;
@@ -18,9 +19,9 @@ protected:
 
 public:
 	
-	Employee2(const std::string& lastName, Position* pos, const std::string& firstName, std::string patronymic, const std::string& DateOfBirth, const std::string& DateOfHiring);
+	Employee2(const QString& lastName, Position* pos, const std::string& firstName, std::string patronymic, const std::string& DateOfBirth, const std::string& DateOfHiring);
 
-	std::string GetLastName();
+	QString GetLastName();
 	std::string GetFirstName();
 	std::string GetPatronymic();
 	std::string GetDateOfBirth();

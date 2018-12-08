@@ -34,6 +34,7 @@
 #include <vector>
 #include <set>
 #include <map>
+#include "utils.h"
 
 #define CM_ADD_EMPLOYEE  '1'
 #define CM_DEL_EMPLOYEE  '2'
@@ -103,7 +104,7 @@ int firmAppMain(int argc, _TCHAR* argv[])
 
 		case CM_DEL_EMPLOYEE:
 					{
-					std::string lastName = consoleWrapper.AscEmployeLast();
+					QString lastName = toQtString( consoleWrapper.AscEmployeLast() );
 										
 					company2.DeleteEmployee2(lastName);
 					}
@@ -111,7 +112,7 @@ int firmAppMain(int argc, _TCHAR* argv[])
 
 		case CM_CHANGE_POSITION:
 					{
-					std::string lastName = consoleWrapper.AscEmployeLast();
+					QString lastName = toQtString( consoleWrapper.AscEmployeLast() );
 					
 					Position* pos = consoleWrapper.AscPosition();
 
@@ -121,9 +122,9 @@ int firmAppMain(int argc, _TCHAR* argv[])
 
 		case CM_ASSOCIATE_EMPLOYEE:
 					{
-					std::string lastNameManager = consoleWrapper.AscManagerLast();
+					QString lastNameManager = toQtString( consoleWrapper.AscManagerLast() );
 
-					std::string lastName = consoleWrapper.AscEmployeLast();
+					QString lastName = toQtString( consoleWrapper.AscEmployeLast() );
 
 					company2.AssociateAnEmployeeWithAManager(lastNameManager, lastName);
 					}
@@ -143,7 +144,7 @@ int firmAppMain(int argc, _TCHAR* argv[])
 
 		case CM_GET_LIST_ASSOCIATE:
 					{
-					std::string lastName = consoleWrapper.AscManagerLast();
+					QString lastName = toQtString( consoleWrapper.AscManagerLast() );
 					company2.GetListAssociateAnEmployeeWithAManager(lastName);
 					}
 			break;

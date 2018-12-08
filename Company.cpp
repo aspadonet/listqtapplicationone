@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include "utils.h"
 
 void Company2::AddEmployee(Employee2* empl)
 {
@@ -30,7 +31,7 @@ void Company2::AddEmployeeFromFile(Employee2* empl)
 }
 
 
-void Company2::DeleteEmployee(std::string lastName)
+void Company2::DeleteEmployee(QString lastName)
 {
 	
 	std::vector<Employee2*>::const_iterator it = FindEmployeeByLastName(lastName);
@@ -48,7 +49,7 @@ void Company2::DeleteEmployee(std::string lastName)
 	}
 }
 
-void Company2::DeleteEmployee2( std::string lastName )
+void Company2::DeleteEmployee2(QString lastName )
 {
 	std::vector<Employee2*>::const_iterator it = FindEmployeeByLastName(lastName);
 
@@ -75,7 +76,7 @@ void Company2::DeleteEmployeFromLeaders(Employee2* emp)
   }
 }
 
-void Company2::ChangePosition(std::string lastName, Position* pos)
+void Company2::ChangePosition(QString lastName, Position* pos)
 {
   Employee2* emp = FindEmployeeByLastName2( lastName );
   if( !emp )
@@ -87,7 +88,7 @@ void Company2::ChangePosition(std::string lastName, Position* pos)
 	emp->SetPositionName(pos);
 }
 
-void Company2::AssociateAnEmployeeWithAManager( std::string lastNameManager, std::string lastName )
+void Company2::AssociateAnEmployeeWithAManager(QString lastNameManager, QString lastName )
 {
   LeaderBehavior* leader = FindLeaderEmployeeByLastName( lastNameManager );
   if( !leader )
@@ -108,7 +109,7 @@ void Company2::AssociateAnEmployeeWithAManager( std::string lastNameManager, std
 //	Manager->SetLeaderBehavior(emp);
 }
 
-void Company2::GetListAssociateAnEmployeeWithAManager(std::string lastNameManager)
+void Company2::GetListAssociateAnEmployeeWithAManager(QString lastNameManager)
 {
   LeaderBehavior* leader = FindLeaderEmployeeByLastName( lastNameManager );
   if( !leader )
@@ -127,12 +128,12 @@ std::vector< Employee2*> Company2::GetEmployees()
 
 void Company2::SortTheListByLastName()
 {
-	std::set <std::string> setEmployoee;
+	std::set <QString> setEmployoee;
 
 	for (long i = 0; i < employees.size(); i++)
 	{
 		Employee2* emp = employees[i];
-		std::string lastName = emp->GetLastName();
+		QString lastName = emp->GetLastName();
 
 		setEmployoee.insert(lastName);
 	}
@@ -178,7 +179,7 @@ void Company2::SortTheListByDateOfHiring()
 	
 }
 
-std::vector<Employee2*>::const_iterator Company2::FindEmployeeByLastName(const std::string& lastName)
+std::vector<Employee2*>::const_iterator Company2::FindEmployeeByLastName(const QString& lastName)
 {
 	for (auto it = employees.cbegin(); it != employees.cend(); it++)
 	{
@@ -245,7 +246,7 @@ std::vector< LeaderBehavior* >  Company2::getAllLeaders()
 	return leaders;
 }
 
-Employee2* Company2::FindEmployeeByLastName2( const std::string& lastName )
+Employee2* Company2::FindEmployeeByLastName2( const QString& lastName )
 {
   auto it = FindEmployeeByLastName( lastName );
   if( it == employees.cend() )
@@ -254,7 +255,7 @@ Employee2* Company2::FindEmployeeByLastName2( const std::string& lastName )
   return *it;
 }
 
-LeaderBehavior* Company2::FindLeaderEmployeeByLastName( const std::string& lastName )
+LeaderBehavior* Company2::FindLeaderEmployeeByLastName( const QString& lastName )
 {
   for( auto it = employees.cbegin(); it != employees.cend(); it++ )
   {
@@ -352,11 +353,11 @@ void ComponyConsole::PrintEmplyeesListBySortLastName(std::vector<Employee2*>  em
 	}
 }
 
-void ComponyConsole::PrintReportRow(const std::string& pos, const std::string& lastName, const std::string& firstName, const std::string& patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring)
+void ComponyConsole::PrintReportRow(const std::string& pos, const QString& lastName, const std::string& firstName, const std::string& patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring)
 { 
 	std::cout << std::left
 		<< std::setw(15) << pos
-		<< std::setw(15) << lastName
+		<< std::setw(15) << lastName.toLocal8Bit().constData()
 		<< std::setw(15) << firstName
 		<< std::setw(15) << patronymic
 		<< std::setw(15) << dateOfBirth
@@ -474,10 +475,14 @@ Employee2* ComponyConsole::MakeEmployeFromStdin(bool& askAgain)
 		return nullptr;
 	}
 
-	std::string lastName;
+	
+	std::string stdStrLastName;
 
 	std::cout << " Фамилия " << std::endl;
-	std::cin >> lastName;
+	std::cin >> stdStrLastName;
+
+	QString lastName = toQtString(  stdStrLastName );
+
 
 	std::string firstName;
 
@@ -581,7 +586,7 @@ void File2::ReadEmplyeesList(Company2& company)
 					
 				}
 
-				std::string lastName = wordsVector[1];
+				QString lastName = toQtString( wordsVector[1] );
 
 				std::string firstName = wordsVector[2];
 
@@ -634,7 +639,7 @@ void File2::ReadEmplyeesList(Company2& company)
 				if (wordsVector[0] == "open")
 				{
 
-					std::string nameLider = wordsVector[5];
+					QString nameLider = toQtString( wordsVector[5] );
 					std::string swV = "";
 					while (swV != "Close")
 					{
@@ -652,7 +657,7 @@ void File2::ReadEmplyeesList(Company2& company)
 						}
 						
 
-						std::string lastName = wordsVector2[1];
+						QString lastName = toQtString( wordsVector2[1] );
 						if (wordsVector2[0] == "Close")
 						{
 							swV = "Close";
@@ -691,7 +696,7 @@ void File2::WriteEmplyeesList(Company2& company)
 		{
 			std::string temp = "";
 			
-			temp = emp2->GetPositionName() + " " + emp2->GetLastName() + " " + emp2->GetFirstName() + " " + emp2->GetPatronymic() + " " + emp2->GetDateOfBirth() + " " + emp2->GetDateOfHiring() + "\n";
+			temp = emp2->GetPositionName() + " " + toStdString( emp2->GetLastName() ) + " " + emp2->GetFirstName() + " " + emp2->GetPatronymic() + " " + emp2->GetDateOfBirth() + " " + emp2->GetDateOfHiring() + "\n";
 			
 			fout << temp;
 			if (emp2->CanHaveSubmissed())
@@ -699,7 +704,7 @@ void File2::WriteEmplyeesList(Company2& company)
 				if (!emp2->GetLeaderBehavior2()->getSubmissed().empty())
 				{
 
-					std::string temp2 = "open Associate An Employee With " + emp2->GetLastName() + "\n";
+					std::string temp2 = "open Associate An Employee With " + toStdString( emp2->GetLastName() ) + "\n";
 
 					fout << temp2;
 					std::vector <Employee2*> EmpAssociate = emp2->GetLeaderBehavior2()->getSubmissed();
@@ -707,11 +712,11 @@ void File2::WriteEmplyeesList(Company2& company)
 					{
 						std::string temp3 = "";
 
-						temp3 = emp2->GetPositionName() + " " + emp2->GetLastName() + " " + emp2->GetFirstName() + " " + emp2->GetPatronymic() + " " + emp2->GetDateOfBirth() + " " + emp2->GetDateOfHiring() + "\n";
+						temp3 = emp2->GetPositionName() + " " + toStdString( emp2->GetLastName() ) + " " + emp2->GetFirstName() + " " + emp2->GetPatronymic() + " " + emp2->GetDateOfBirth() + " " + emp2->GetDateOfHiring() + "\n";
 
 						fout << temp3;
 					}
-					temp2 = "Close Associate An Employee With " + emp2->GetLastName() + "\n";
+					temp2 = "Close Associate An Employee With " + toStdString( emp2->GetLastName() ) + "\n";
 					fout << temp2;
 				}
 			}

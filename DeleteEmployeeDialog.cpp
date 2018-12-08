@@ -26,7 +26,7 @@ DeleteEmployeeDialog::DeleteEmployeeDialog(std::vector< Employee2* > employees, 
 		Employee2* emp2 = *it;
 		
 		QString PositionName = toQtString(emp2->GetPositionName());
-		QString LastName = toQtString(emp2->GetLastName());
+		QString LastName = emp2->GetLastName();
 		QString FirstName = toQtString(emp2->GetFirstName());
 		QString Patronymic = toQtString(emp2->GetPatronymic());
 		QString DateOfBirth = toQtString(emp2->GetDateOfBirth());
@@ -78,13 +78,13 @@ void DeleteEmployeeDialog::onDelete()
 		wordsVector.push_back(word);
 	}
 	   
-	lastName = wordsVector[1];
+	lastName = toQtString(wordsVector[1]);
 	
 	accept();
 	
 }
 
-std::string DeleteEmployeeDialog::getLastName()
+QString DeleteEmployeeDialog::getLastName()
 {
 	return lastName;
 }

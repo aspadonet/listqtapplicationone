@@ -12,3 +12,22 @@ x- команда "вывести список работников привяз
 - использовать для дат тип QDate
 
 
+std::vector< Emplyees* > loadEmployees()
+{
+   std::vector< Emplyees* >  employeesVec;
+
+
+    QSqlQuery query("SELECT country, bla, blabla FROM artist");
+    while (query.next())
+    {
+        Emplyee emp;
+
+        emp.name = query.value(0).toString();
+        emp.lastName = query.value(1).toString();
+        ....
+
+        employeesVec.push_back( emp );
+    }
+
+    return employeesVec;
+}

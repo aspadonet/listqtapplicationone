@@ -11,7 +11,7 @@ class GetListAssociateAnEmployeeWithAManagerDialog : public QDialog
 public:
 	GetListAssociateAnEmployeeWithAManagerDialog(std::vector< Employee2* > employees, QWidget* parrent = nullptr);
 	QString toQtString(const std::string& s);
-	std::string getLastNameManager();
+	QString getLastNameManager();
 private:
 	Employee2* empl;
 	Position* pos = nullptr;
@@ -20,10 +20,11 @@ private:
 	QPushButton* okBtn;
 	QPushButton* canselBtn;
 	QComboBox* cboEmployee;
-	QStringList lst;
+//	QStringList lst;
 	QVBoxLayout* vBxoLayouot;
-	std::string lastNameManager;
-	std::string lastName;
+	QString lastNameManager;
+
+	std::vector< QString > lastNames;
 private slots:
 	void onCansel();
 	void onOk();

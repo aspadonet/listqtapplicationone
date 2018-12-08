@@ -14,7 +14,7 @@ class DeleteEmployeeDialog : public QDialog
 public:
 	DeleteEmployeeDialog(std::vector< Employee2* > employees,QWidget* parrent = nullptr);
 	QString toQtString(const std::string& s);
-	std::string getLastName();
+	QString getLastName();
 private:
 	Company2 company2;
 	Employee2* empl;
@@ -24,7 +24,7 @@ private:
 	QComboBox* cbo;
 	QStringList lst;
 	QVBoxLayout* vBxoLayouot;
-	std::string lastName;
+	QString lastName;
 private slots:
 	void onCansel();
 	void onDelete();

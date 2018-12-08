@@ -14,7 +14,7 @@ class ChangePositionDialog : public QDialog
 public:
 	ChangePositionDialog(std::vector< Employee2* > employees, QWidget* parrent = nullptr);
 //	QString toQtString(const std::string& s);
-	std::string getLastName();
+	QString getLastName();
 	Position* getPositionName();
 private:
 	Employee2* empl;
@@ -29,7 +29,7 @@ private:
 	QStringList lst;
 	QStringList lstPos;
 	QVBoxLayout* vBxoLayouot;
-	std::string lastName;
+	QString lastName;
 private slots:
 	void onCansel();
 	void onChange();

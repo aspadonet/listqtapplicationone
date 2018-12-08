@@ -65,23 +65,7 @@ Widget::Widget(QWidget *parent)
 
 	QObject::connect(tbl, &QMenu::customContextMenuRequested, this, &Widget::slotCustomMenuRequested);
 	QObject::connect(tbl, &QTableWidget::doubleClicked, this, &Widget::GetListAssociateCM);
-//	emplyeesVec = company2.GetEmployees();//	EmploeesTableWidget
-//	tbl = new EmploeesTableWidget(emplyeesVec);//	EmploeesTableWidget
-/*       tbl->setHorizontalHeaderLabels(lst);
-	   tbl->setVerticalHeaderLabels(lst);
 
-	   for (int i  = 0; i < 5; ++i) {
-		   for (int j = 0; j < 5; ++j) {
-			   ptwi = new QTableWidgetItem(QString("%1,%2").arg(i).arg(j));
-			   tbl->setItem(i, j, ptwi);
-		   }
-	   }
-	   */
-	//tbl->resize(400, 400);
-	
-	
-
-	//Layout setup
 	pvbxLayout = new QVBoxLayout;
     pvbxLayout->addWidget(tbl);
 	pvbxLayout->addWidget(btnAddEmployee);
@@ -103,24 +87,34 @@ Widget::Widget(QWidget *parent)
 
 Widget::~Widget()
 {
-
 }
 
 void Widget::slotCustomMenuRequested(QPoint pos)
 {
+	QTableWidgetItem* item = tbl->itemAt( pos );
+	if (!item)
+		return;
 
-	menu = new QMenu(this);
+	int emplyeeIndex = item->row();
+//	Employee2* curentEmp = emplyeesVec[row];
+
+	QMenu* popupMenu = new QMenu(this);
 
 	QAction * editDevice = new QAction(toQtString("Редактировать"), this);
 	QAction * deleteDevice = new QAction(toQtString("Удалить"), this);
-
 	
-	QObject::connect(editDevice, &QAction::triggered, this, &Widget::AddEmployee);
-	QObject::connect(deleteDevice, &QAction::triggered, this, &Widget::DelEmployeeCM);
-	menu->addAction(editDevice);
-	menu->addAction(deleteDevice);
+//	QObject::connect(editDevice, &QAction::triggered, this, [ emplyeeIndex ]()
+//	{
+//		EditEmployee( emplyeeIndex );
+//	} );
 
-	menu->popup(tbl->viewport()->mapToGlobal(pos));
+	QObject::connect(deleteDevice, &QAction::triggered, this, &Widget::DelEmployeeCM);
+
+	popupMenu->addAction(editDevice);
+	popupMenu->addAction(deleteDevice);
+
+	QPoint globalPos = tbl->viewport()->mapToGlobal(pos);
+	popupMenu->popup( globalPos );
 }
 
 void Widget::AddEmployee()
@@ -156,7 +150,7 @@ void Widget::DelEmployee()
 	if (QDialog::Rejected == widgetDeleteEmployee.exec())
 		return;
 
-	std::string lastName = widgetDeleteEmployee.getLastName();
+	QString lastName = widgetDeleteEmployee.getLastName();
 	
 	company2.DeleteEmployee2(lastName);
 
@@ -165,25 +159,13 @@ void Widget::DelEmployee()
 
 void Widget::DelEmployeeCM()
 {
-	std::vector< Employee2* > employees = company2.GetEmployees();
-
 	int row = tbl->selectionModel()->currentIndex().row();
 
-	QTableWidgetItem *	lastNameitem; 
+	QTableWidgetItem* lastNameitem = tbl->item(row, 1);
 
-	lastNameitem = tbl->item(row, 1);
-	lastNameitem->text();
-
-	QString qstrlastName;
-
-	qstrlastName = lastNameitem->text();
-
-	std::string lastName = qstrlastName.toLocal8Bit().constData();
-		
-
-	company2.DeleteEmployee2(lastName);
-
+	QString lastName = lastNameitem->text();
 	
+	company2.DeleteEmployee2(lastName);
 }
 
 void Widget::ChangePosition()
@@ -197,16 +179,13 @@ void Widget::ChangePosition()
 	if (QDialog::Rejected == widgetChangePositionDialog.exec())
 		return;
 
-	std::string lastName = widgetChangePositionDialog.getLastName();
+	QString lastName = widgetChangePositionDialog.getLastName();
 	
-	Position* pos = nullptr;
-	
-	pos = widgetChangePositionDialog.getPositionName();
+	Position* pos = widgetChangePositionDialog.getPositionName();
 	
 	company2.ChangePosition(lastName, pos);
-	
-
 }
+
 void Widget::AssociateEmployee()
 {
 	std::vector< Employee2* > employees = company2.GetEmployees();
@@ -218,9 +197,9 @@ void Widget::AssociateEmployee()
 	if (QDialog::Rejected == widgetAssociateAnEmployeeWithAManagerDialog.exec())
 		return;
 	
-	std::string lastNameManager = widgetAssociateAnEmployeeWithAManagerDialog.getLastNameManager();
+	QString lastNameManager = widgetAssociateAnEmployeeWithAManagerDialog.getLastNameManager();
 	
-	std::string lastName = widgetAssociateAnEmployeeWithAManagerDialog.getLastName();
+	QString lastName = widgetAssociateAnEmployeeWithAManagerDialog.getLastName();
 	
 	company2.AssociateAnEmployeeWithAManager(lastNameManager, lastName);
 }
@@ -248,7 +227,7 @@ void Widget::GetListAssociate()
 	if (QDialog::Rejected == widgetGetListAssociateAnEmployeeWithAManagerDialog.exec())
 		return;
 	
-	std::string lastNameManager = widgetGetListAssociateAnEmployeeWithAManagerDialog.getLastNameManager();
+	QString lastNameManager = widgetGetListAssociateAnEmployeeWithAManagerDialog.getLastNameManager();
 	
 	LeaderBehavior* leader = company2.FindLeaderEmployeeByLastName(lastNameManager);
 	if (!leader)
@@ -315,7 +294,7 @@ void Widget::GetListAssociate()
 			ptwi = new QTableWidgetItem(toQtString(submissed[i]->GetPositionName()));
 			tbl->setItem(i, 0, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetLastName()));
+			ptwi = new QTableWidgetItem(submissed[i]->GetLastName());
 			tbl->setItem(i, 1, ptwi);
 
 			ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetFirstName()));
@@ -342,14 +321,8 @@ void Widget::GetListAssociateCM()
 	lastNameitem = tbl->item(row, 1);
 	lastNameitem->text();
 
-	QString qstrlastName;
-
-	qstrlastName = lastNameitem->text();
-
-	std::string lastName = qstrlastName.toLocal8Bit().constData();
-
-
-	std::string lastNameManager = lastName;
+	QString lastName = lastNameitem->text();
+	QString lastNameManager = lastName;
 
 	LeaderBehavior* leader = company2.FindLeaderEmployeeByLastName(lastNameManager);
 	if (!leader)
@@ -466,7 +439,7 @@ void Widget::PrintEmployeeList()
 		ptwi = new QTableWidgetItem(toQtString(emplyeesVec[i]->GetPositionName()));
 		tbl->setItem(i, 0, ptwi);
 
-		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetLastName()));
+		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetLastName());
 		tbl->setItem(i, 1, ptwi);
 
 		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetFirstName()));

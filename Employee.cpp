@@ -2,7 +2,7 @@
 #include "Employee.h"
 
 
-Employee2::Employee2(const std::string& lastName, Position* pos, const std::string& firstName, std::string patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring)
+Employee2::Employee2(const QString& lastName, Position* pos, const std::string& firstName, std::string patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring)
 {
 	LastName = lastName;
   SetPositionName( pos );
@@ -12,7 +12,7 @@ Employee2::Employee2(const std::string& lastName, Position* pos, const std::stri
 	DateOfHiring = dateOfHiring;
 }
 
-std::string Employee2::GetLastName()
+QString Employee2::GetLastName()
 {
 	return LastName;
 }

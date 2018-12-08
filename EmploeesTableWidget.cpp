@@ -70,7 +70,7 @@ EmploeesTableWidget::EmploeesTableWidget(std::vector< Employee2* >& emplyeesList
 			ptwi = new QTableWidgetItem(toQtString(emplyeesVec[i]->GetPositionName()));
 			tbl2->setItem(i, 0, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetLastName()));
+			ptwi = new QTableWidgetItem(emplyeesVec[i]->GetLastName());
 			tbl2->setItem(i, 1, ptwi);
 
 			ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetFirstName()));
