@@ -38,11 +38,12 @@ private:
 	QMenu* menu = nullptr;
 	const int n = 6;
 	QTableWidget*      tbl;//(const int n = 5, const int m = 5);
-//	EmploeesTableWidget* tbl;
+//	EmploeesTableWidget* tbl;//	EmploeesTableWidget
 //	QTableWidgetItem* ptwi = 0;
 //	QStringList lst;
 	QVBoxLayout* pvbxLayout;
 	File2 ftemp;
+	std::vector< Employee2* > emplyeesVec;
 
 
 public:
@@ -53,13 +54,15 @@ private Q_SLOTS:
 	void PrintEmployeeList();
 	void AddEmployee();
 	void DelEmployee();
+	void DelEmployeeCM();
 	void ChangePosition();
 	void AssociateEmployee();
 	void SortLastname();
 	void SortDate();
 	void GetListAssociate();
+	void GetListAssociateCM();
 	void ExitList();
-
+	void slotCustomMenuRequested(QPoint pos);
 Q_SIGNALS:
 	
 

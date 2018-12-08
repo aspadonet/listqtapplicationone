@@ -27,7 +27,7 @@ Widget::Widget(QWidget *parent)
 
 {	
 	
-	btnAddEmployee = new QPushButton(QString::fromLocal8Bit("&добавить сотрудника НЕТ ВАЛИДАЦИИ!!!"));
+	btnAddEmployee = new QPushButton(QString::fromLocal8Bit("&добавить сотрудника"));
 	btnDelEmployee = new QPushButton(QString::fromLocal8Bit("&удалить сотрудника"));
 	btnChangePosition = new QPushButton(QString::fromLocal8Bit("&изменить тип сотрудника"));
 	btnAssociateEmployee = new QPushButton(QString::fromLocal8Bit("&привязывать сотрудника к менеджеру"));
@@ -48,7 +48,25 @@ Widget::Widget(QWidget *parent)
 	QObject::connect(btnGetListAssociate, &QPushButton::clicked, this, &Widget::GetListAssociate);
 	QObject::connect(btnExit, &QPushButton::clicked, this, &Widget::ExitList);
 	//lst << "First" << "Second" << "Third" << "Second" << "Third";
-	tbl = new QTableWidget(n,n);
+	
+	
+	ftemp.ReadEmplyeesList(company2);
+	tbl= new QTableWidget(n, n);
+	//tbl->setModel(modelDevice);
+	//tbl->setColumnHidden(0, true);
+	tbl->setSelectionBehavior(QAbstractItemView::SelectRows);
+	/*tbl->setSelectionMode(QAbstractItemView::SingleSelection);*/
+	//tbl->resizeColumnsToContents();
+	tbl->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	//tbl->horizontalHeader()->setStretchLastSection(true);
+	tbl->resize(400, 400);
+
+	tbl->setContextMenuPolicy(Qt::CustomContextMenu);
+
+	QObject::connect(tbl, &QMenu::customContextMenuRequested, this, &Widget::slotCustomMenuRequested);
+	QObject::connect(tbl, &QTableWidget::doubleClicked, this, &Widget::GetListAssociateCM);
+//	emplyeesVec = company2.GetEmployees();//	EmploeesTableWidget
+//	tbl = new EmploeesTableWidget(emplyeesVec);//	EmploeesTableWidget
 /*       tbl->setHorizontalHeaderLabels(lst);
 	   tbl->setVerticalHeaderLabels(lst);
 
@@ -59,9 +77,9 @@ Widget::Widget(QWidget *parent)
 		   }
 	   }
 	   */
-	tbl->resize(400, 400);
-
-
+	//tbl->resize(400, 400);
+	
+	
 
 	//Layout setup
 	pvbxLayout = new QVBoxLayout;
@@ -78,14 +96,31 @@ Widget::Widget(QWidget *parent)
 
 	setLayout(pvbxLayout);
 		
-	ftemp.ReadEmplyeesList(company2);
-	
+	//ftemp.ReadEmplyeesList(company2);
+//	tbl->PrintEmployeeList(); //	EmploeesTableWidget
 	PrintEmployeeList();
 }
 
 Widget::~Widget()
 {
 
+}
+
+void Widget::slotCustomMenuRequested(QPoint pos)
+{
+
+	menu = new QMenu(this);
+
+	QAction * editDevice = new QAction(toQtString("Редактировать"), this);
+	QAction * deleteDevice = new QAction(toQtString("Удалить"), this);
+
+	
+	QObject::connect(editDevice, &QAction::triggered, this, &Widget::AddEmployee);
+	QObject::connect(deleteDevice, &QAction::triggered, this, &Widget::DelEmployeeCM);
+	menu->addAction(editDevice);
+	menu->addAction(deleteDevice);
+
+	menu->popup(tbl->viewport()->mapToGlobal(pos));
 }
 
 void Widget::AddEmployee()
@@ -127,6 +162,30 @@ void Widget::DelEmployee()
 
 	//widgetDeleteEmployeeDialog.show();
 }
+
+void Widget::DelEmployeeCM()
+{
+	std::vector< Employee2* > employees = company2.GetEmployees();
+
+	int row = tbl->selectionModel()->currentIndex().row();
+
+	QTableWidgetItem *	lastNameitem; 
+
+	lastNameitem = tbl->item(row, 1);
+	lastNameitem->text();
+
+	QString qstrlastName;
+
+	qstrlastName = lastNameitem->text();
+
+	std::string lastName = qstrlastName.toLocal8Bit().constData();
+		
+
+	company2.DeleteEmployee2(lastName);
+
+	
+}
+
 void Widget::ChangePosition()
 {
 	std::vector< Employee2* > employees = company2.GetEmployees();
@@ -194,7 +253,11 @@ void Widget::GetListAssociate()
 	LeaderBehavior* leader = company2.FindLeaderEmployeeByLastName(lastNameManager);
 	if (!leader)
 	{
-//		MsgBox
+		QMessageBox msgBox;
+		msgBox.setWindowTitle("ERROR");
+		msgBox.setText(QString::fromLocal8Bit("нет подчинёных!!!"));
+		msgBox.exec();
+
 		return;
 	}
 
@@ -268,7 +331,108 @@ void Widget::GetListAssociate()
 			tbl->setItem(i, 5, ptwi);
 		}
 }
+void Widget::GetListAssociateCM()
+{
+	std::vector< Employee2* > employees = company2.GetEmployees();
+
+	int row = tbl->selectionModel()->currentIndex().row();
+
+	QTableWidgetItem *	lastNameitem;
+
+	lastNameitem = tbl->item(row, 1);
+	lastNameitem->text();
+
+	QString qstrlastName;
+
+	qstrlastName = lastNameitem->text();
+
+	std::string lastName = qstrlastName.toLocal8Bit().constData();
+
+
+	std::string lastNameManager = lastName;
+
+	LeaderBehavior* leader = company2.FindLeaderEmployeeByLastName(lastNameManager);
+	if (!leader)
+	{
+		QMessageBox msgBox;
+		msgBox.setWindowTitle("ERROR");
+		msgBox.setText(QString::fromLocal8Bit("нет подчинёных!!!"));
+		msgBox.exec();
 	
+		return;
+	}
+
+	{
+		QStringList lst;
+
+		lst << toQtString("Должность")
+			<< QString::fromLocal8Bit("Фамилия")
+			<< QString::fromLocal8Bit("Имя")
+			<< QString::fromLocal8Bit("Отчество")
+			<< QString::fromLocal8Bit("Дата рождения")
+			<< QString::fromLocal8Bit("Дата устройство на работу");
+
+		tbl->setHorizontalHeaderLabels(lst);
+	}
+
+	auto submissed = leader->getSubmissed();
+
+	//	QEmplyeeListDlg dlg(submissed);
+	//	dlg.exec();
+
+	QDialog submissedDlg;
+
+	submissedDlg.resize(800, 800);
+
+	EmploeesTableWidget* submissedTbl = new EmploeesTableWidget(submissed, &submissedDlg);
+
+	QVBoxLayout* layout = new QVBoxLayout();
+	layout->addWidget(submissedTbl);
+
+	submissedDlg.setLayout(layout);
+
+	submissedDlg.exec();
+
+	return;
+
+
+	//tbl->setColumnCount(6);
+
+	//tbl->setRowCount(submissed.size());
+
+
+
+	//QTableWidgetItem* ptwi = nullptr;
+
+	//for (long i = 0; i < submissed.size(); i++)
+	//{
+
+
+
+	//	//		std::string stdStr = emplyeesVec[i]->GetPositionName();
+	//	//		const char* cStr = stdStr.c_str();
+	//	//
+	//	//		QString qStr = QString::fromLocal8Bit(cStr);
+
+	//	ptwi = new QTableWidgetItem(toQtString(submissed[i]->GetPositionName()));
+	//	tbl->setItem(i, 0, ptwi);
+
+	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetLastName()));
+	//	tbl->setItem(i, 1, ptwi);
+
+	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetFirstName()));
+	//	tbl->setItem(i, 2, ptwi);
+
+	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetPatronymic()));
+	//	tbl->setItem(i, 3, ptwi);
+
+	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetDateOfBirth()));
+	//	tbl->setItem(i, 4, ptwi);
+
+	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetDateOfHiring()));
+	//	tbl->setItem(i, 5, ptwi);
+	//}
+}
 
 void Widget::PrintEmployeeList()
 {

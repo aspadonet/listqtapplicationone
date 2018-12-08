@@ -3,6 +3,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets>
+#include <QMessageBox>
 #include "utils.h"
 
 EmployeeDialog::EmployeeDialog(QWidget* parent)
@@ -42,6 +43,8 @@ EmployeeDialog::EmployeeDialog(QWidget* parent)
 	
 
 	QPushButton* okBtn = new QPushButton("Ok");
+
+	//okBtn->setEnabled(false);
 	
 	canselBtn = new QPushButton("Cansel");
 	
@@ -138,10 +141,24 @@ void EmployeeDialog::onOk()
 	
 	std::string dateOfHiring = qstr.toStdString();
 
-	empl =  new Employee2(lastName, pos, firstName, patronymic, dateOfBirth, dateOfHiring);
+	if (lastName.empty() || firstName.empty() || patronymic.empty() || dateOfBirth.empty() || dateOfHiring.empty())
+	{
+		
+		QMessageBox msgBox;
+		msgBox.setWindowTitle("ERROR");
+		msgBox.setText(QString::fromLocal8Bit("Заполните все поля"));
+		msgBox.exec();
+	}
+	else
+	{
+		empl = new Employee2(lastName, pos, firstName, patronymic, dateOfBirth, dateOfHiring);
+		accept();
+	}
+
+	
 
 
-	accept();
+	
 }
 
 Employee2 * EmployeeDialog::getEmploee()
