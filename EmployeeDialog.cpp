@@ -39,7 +39,7 @@ EmployeeDialog::EmployeeDialog(QWidget* parent)
 
 	plblDateOfHiring = new QLabel(QString::fromLocal8Bit("Дата устройство на работу"));
 
-	pleDateOfHiring = new QLineEdit;
+	pleDateOfHiring = new QDateEdit;
 	
 
 	QPushButton* okBtn = new QPushButton("Ok");
@@ -125,21 +125,21 @@ void EmployeeDialog::onOk()
 	
 	qstr = pleFirstName->text();
 	
-	std::string firstName = qstr.toStdString();
+	QString firstName = pleFirstName->text();
 	
 	qstr = plePatronymic->text();
 	
-	std::string patronymic = qstr.toStdString();
+	QString patronymic = plePatronymic->text();
 	
 	qstr = pleDateOfBirth->date().toString();
 	
-	std::string dateOfBirth = qstr.toStdString();
+	QDate dateOfBirth = pleDateOfBirth->date();
 	
 	qstr = pleDateOfHiring->text();
 	
-	std::string dateOfHiring = qstr.toStdString();
+	QDate dateOfHiring = pleDateOfHiring->date();
 
-	if (lastName.isEmpty() || firstName.empty() || patronymic.empty() || dateOfBirth.empty() || dateOfHiring.empty())
+	if (lastName.isEmpty() || firstName.isEmpty() || patronymic.isEmpty())
 	{
 		
 		QMessageBox msgBox;

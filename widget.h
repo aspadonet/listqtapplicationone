@@ -2,17 +2,6 @@
 
 #include <QtWidgets/QWidget>
 #include "Company.h"
-
-//class listqtapplicationone : public QWidget
-//{
-//	Q_OBJECT
-//
-//public:
-//	listqtapplicationone(QWidget *parent = Q_NULLPTR);
-//
-//private:
-//	
-//};
 #ifndef WIDGET_H
 #define WIDGET_H
 #include <QtWidgets>
@@ -20,6 +9,7 @@
 #include <QTableWidget>
 #include "Company.h"
 #include "EmploeesTableWidget.h"
+#include <QFileDialog>
 
 class Widget : public QWidget
 {
@@ -36,6 +26,8 @@ private:
 	QPushButton* btnGetListAssociate;
 	QPushButton* btnExit;
 	QMenu* menu = nullptr;
+	QMenu* menuBase = nullptr;
+	QMenuBar* menuBaseBar;
 	const int n = 6;
 	QTableWidget*      tbl;//(const int n = 5, const int m = 5);
 //	EmploeesTableWidget* tbl;//	EmploeesTableWidget
@@ -63,6 +55,7 @@ private Q_SLOTS:
 	void GetListAssociateCM();
 	void ExitList();
 	void slotCustomMenuRequested(QPoint pos);
+	void getOpenFileName();
 Q_SIGNALS:
 	
 

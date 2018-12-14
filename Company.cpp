@@ -118,7 +118,7 @@ void Company2::GetListAssociateAnEmployeeWithAManager(QString lastNameManager)
 	  return;
   }
 	
-	ComponyConsole().PrintSubmissedList( leader );
+//	ComponyConsole().PrintSubmissedList( leader );//	ComponyConsole().PrintSubmissedList( leader );
 }
 
 std::vector< Employee2*> Company2::GetEmployees()
@@ -149,17 +149,17 @@ void Company2::SortTheListByLastName()
 		employeesLastName.push_back(LN);
 				
 	}
-	ComponyConsole().PrintEmplyeesListBySortLastName(employeesLastName);
+//	ComponyConsole().PrintEmplyeesListBySortLastName(employeesLastName);//	ComponyConsole().PrintEmplyeesListBySortLastName(employeesLastName);
 }
 
 void Company2::SortTheListByDateOfHiring()
 {
-	std::set <std::string> setEmployoee;
+	std::set <QDate> setEmployoee;
 
 	for (long i = 0; i < employees.size(); i++)
 	{
 		Employee2* emp = employees[i];
-		std::string DateOfHiring = emp->GetDateOfHiring();
+	QDate DateOfHiring = emp->GetDateOfHiring();
 
 		setEmployoee.insert(DateOfHiring);
 	}
@@ -175,7 +175,7 @@ void Company2::SortTheListByDateOfHiring()
 		employeesDateOfHiring.push_back(LN);
 
 	}
-	ComponyConsole().PrintEmplyeesListBySortLastName(employeesDateOfHiring);
+//	ComponyConsole().PrintEmplyeesListBySortLastName(employeesDateOfHiring);//	ComponyConsole().PrintEmplyeesListBySortLastName(employeesDateOfHiring);
 	
 }
 
@@ -196,7 +196,7 @@ std::vector<Employee2*>::const_iterator Company2::FindEmployeeByLastName(const Q
 	return  it;
 }
 
-std::vector<Employee2*>::const_iterator Company2::FindEmployeeByDateOfHiring(const std::string& DateOfHiring)
+std::vector<Employee2*>::const_iterator Company2::FindEmployeeByDateOfHiring(const QDate& DateOfHiring)
 {
 	for (auto it = employees.cbegin(); it != employees.cend(); it++)
 	{
@@ -293,233 +293,233 @@ bool Company2::EmployeeMatchCheck(Employee2* empl)
 }
 //PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", "Дата рождения", "Дата устройство на работу", "Описание");
 
-void ComponyConsole::PrintEmplyeesList(Company2& company)
-{
-	std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
-
-	PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", "Дата", "Дата");
-
-	for (Employee2* emp2 : company.GetEmployees())
-	{
-		PrintReportRow(emp2->GetPositionName(), emp2->GetLastName(), emp2->GetFirstName(), emp2->GetPatronymic(), emp2->GetDateOfBirth(), emp2->GetDateOfHiring());
-	}
-}
+//void ComponyConsole::PrintEmplyeesList(Company2& company)
+//{
+//	std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
+//
+//	PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", "Дата", "Дата");
+//
+//	for (Employee2* emp2 : company.GetEmployees())
+//	{
+//		PrintReportRow(emp2->GetPositionName(), emp2->GetLastName(), emp2->GetFirstName(), emp2->GetPatronymic(), emp2->GetDateOfBirth(), emp2->GetDateOfHiring());
+//	}
+//}
 
 int Company2::GetEmployeesCount()
 {
 	return employees.size();
 }
-//void ComponyConsole::PrintLeaderBehavior(std::vector<Employee2*>  Employee)
+////void ComponyConsole::PrintLeaderBehavior(std::vector<Employee2*>  Employee)
+////{
+////	std::cout << "список  сотрудников привязыных к менеджеру" << std::endl;
+////	std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
+////	std::cout << std::endl;
+////
+////	PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", 000, 000);
+////
+////	for (long i = 0; i < Employee.size(); i++)
+////	{
+////		Employee2* emp2 = Employee[i];
+////		PrintReportRow(emp2->GetPositionName(), emp2->GetLastName(), emp2->GetFirstName(), emp2->GetPatronymic(), emp2->GetDateOfBirth(), emp2->GetDateOfHiring());
+////	}
+////	
+////}
+//
+//void ComponyConsole::PrintSubmissedList( LeaderBehavior* leader )
 //{
-//	std::cout << "список  сотрудников привязыных к менеджеру" << std::endl;
+//  std::cout << "список  сотрудников привязыных к менеджеру" << std::endl;
+//  std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
+//  std::cout << std::endl;
+//
+//  PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", "Дата", "Дата");
+//
+//  auto submissed = leader->getSubmissed();
+//  for( long i = 0; i < submissed.size(); i++ )
+//  {
+//    Employee2* emp2 = submissed[ i ];
+//    PrintReportRow( emp2->GetPositionName(), emp2->GetLastName(), emp2->GetFirstName(), emp2->GetPatronymic(), emp2->GetDateOfBirth(), emp2->GetDateOfHiring() );
+//  }
+//}
+//
+//void ComponyConsole::PrintEmplyeesListBySortLastName(std::vector<Employee2*>  employeesLastName)
+//{
 //	std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
-//	std::cout << std::endl;
 //
-//	PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", 000, 000);
+//	PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", "Дата", "Дата");
 //
-//	for (long i = 0; i < Employee.size(); i++)
+//	for (Employee2* emp2 : employeesLastName)
 //	{
-//		Employee2* emp2 = Employee[i];
 //		PrintReportRow(emp2->GetPositionName(), emp2->GetLastName(), emp2->GetFirstName(), emp2->GetPatronymic(), emp2->GetDateOfBirth(), emp2->GetDateOfHiring());
 //	}
-//	
 //}
-
-void ComponyConsole::PrintSubmissedList( LeaderBehavior* leader )
-{
-  std::cout << "список  сотрудников привязыных к менеджеру" << std::endl;
-  std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
-  std::cout << std::endl;
-
-  PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", "Дата", "Дата");
-
-  auto submissed = leader->getSubmissed();
-  for( long i = 0; i < submissed.size(); i++ )
-  {
-    Employee2* emp2 = submissed[ i ];
-    PrintReportRow( emp2->GetPositionName(), emp2->GetLastName(), emp2->GetFirstName(), emp2->GetPatronymic(), emp2->GetDateOfBirth(), emp2->GetDateOfHiring() );
-  }
-}
-
-void ComponyConsole::PrintEmplyeesListBySortLastName(std::vector<Employee2*>  employeesLastName)
-{
-	std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
-
-	PrintReportRow("Должность", "Фамилия", "Имя", "Отчество", "Дата", "Дата");
-
-	for (Employee2* emp2 : employeesLastName)
-	{
-		PrintReportRow(emp2->GetPositionName(), emp2->GetLastName(), emp2->GetFirstName(), emp2->GetPatronymic(), emp2->GetDateOfBirth(), emp2->GetDateOfHiring());
-	}
-}
-
-void ComponyConsole::PrintReportRow(const std::string& pos, const QString& lastName, const std::string& firstName, const std::string& patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring)
-{ 
-	std::cout << std::left
-		<< std::setw(15) << pos
-		<< std::setw(15) << lastName.toLocal8Bit().constData()
-		<< std::setw(15) << firstName
-		<< std::setw(15) << patronymic
-		<< std::setw(15) << dateOfBirth
-		<< std::setw(30) << dateOfHiring
-		<< std::setw(30) << "" << std::endl;
-}
-
-std::string ComponyConsole::AscEmployeLast()
-{
-	
-		std::string LastName;
-		std::cout << " Фамилия сотрудника" << std::endl;
-		std::cin >> LastName;
-		
-		return LastName;
-
-}
-std::string ComponyConsole::AscManagerLast()
-{
-
-	std::string LastName;
-	std::cout << " Фамилия Менеджера" << std::endl;
-	std::cin >> LastName;
-
-	return LastName;
-
-}
-
-Position* ComponyConsole::AscPosition()
-{
-	
-	std::cout << "Выберите действие: ... " << std::endl;
-	std::cout << " 1 - добавить рабочего" << std::endl;
-	std::cout << " 2 - добавить менеджера" << std::endl;
-	std::cout << " 3 - добавить руководителя" << std::endl;
-	std::cout << " 4 - добавить уборщика" << std::endl;
-	std::cout << " 7 - Выход" << std::endl;
-
-	char ch;
-	std::cin >> ch;
-
-	Position* pos = nullptr;
-	switch (ch)
-	{
-	case '1':
-		pos = new WorkerPosition();
-		break;
-	case '2':
-		pos = new ManagerPosition();
-		break;
-	case '3':
-		pos = new DirectorPosition();
-		break;
-	case '4':
-		pos = new CleanerPosition();
-		break;
-	case '7': std::cout << "Выход...\n";
-		return nullptr;
-
-	default: std::cout << "Попробуйте еще\n";
-		return nullptr;
-	}
-
-	if (!pos)
-	{
-		// _DEBUG_ERROR( "" );
-		return nullptr;
-	}
-
-
-
-	return pos;
-}
-
-Employee2* ComponyConsole::MakeEmployeFromStdin(bool& askAgain)
-{
-	askAgain = true;
-
-	std::cout << "Выберите действие: ... " << std::endl;
-	std::cout << " 1 - добавить рабочего" << std::endl;
-	std::cout << " 2 - добавить менеджера" << std::endl;
-	std::cout << " 3 - добавить руководителя" << std::endl;
-	std::cout << " 4 - добавить уборщика" << std::endl;
-	std::cout << " 7 - Выход" << std::endl;
-
-	char ch;
-	std::cin >> ch;
-
-	Position* pos = nullptr;
-	switch (ch)
-	{
-	case '1':
-		pos = new WorkerPosition();
-		break;
-	case '2':
-		pos = new ManagerPosition();
-		break;
-	case '3':
-		pos = new DirectorPosition();
-		break;
-	case '4':
-		pos = new CleanerPosition();
-		break;
-	case '7': std::cout << "Выход...\n";
-		askAgain = false;
-		return nullptr;
-
-	default: std::cout << "Попробуйте еще\n";
-		return nullptr;
-	}
-
-	if (!pos)
-	{
-		// _DEBUG_ERROR( "" );
-		return nullptr;
-	}
-
-	
-	std::string stdStrLastName;
-
-	std::cout << " Фамилия " << std::endl;
-	std::cin >> stdStrLastName;
-
-	QString lastName = toQtString(  stdStrLastName );
-
-
-	std::string firstName;
-
-	std::cout << " Имя " << std::endl;
-	std::cin >> firstName;
-
-	std::string patronymic;
-
-	std::cout << " Очество " << std::endl;
-	std::cin >> patronymic;
-
-	std::string dateOfBirth;
-	std::string dateOfYear;
-	std::string dateOfMonth;
-	std::string dateOfDay;
-	std::cout << " Дата рождения " << std::endl;
-	std::cout << " Год " << std::endl;
-	std::cin >> dateOfYear;
-	std::cout << " Месяц " << std::endl;
-	std::cin >> dateOfMonth;
-	std::cout << " День " << std::endl;
-	std::cin >> dateOfDay;
-	dateOfBirth = dateOfYear + "." + dateOfMonth + "." + dateOfDay;
-	std::string dateOfHiring;
-
-	std::cout << " Дата принятия на работу " << std::endl;
-	std::cout << " Год " << std::endl;
-	std::cin >> dateOfYear;
-	std::cout << " Месяц " << std::endl;
-	std::cin >> dateOfMonth;
-	std::cout << " День " << std::endl;
-	std::cin >> dateOfDay;
-	dateOfHiring = dateOfYear + "." + dateOfMonth + "." + dateOfDay;;
-
-
-	return new Employee2(lastName, pos, firstName, patronymic, dateOfBirth, dateOfHiring);
-}
+//
+//void ComponyConsole::PrintReportRow(const std::string& pos, const std::string& lastName, const std::string& firstName, const std::string& patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring)
+//{ 
+//	std::cout << std::left
+//		<< std::setw(15) << pos
+//		<< std::setw(15) << lastName.toLocal8Bit().constData()
+//		<< std::setw(15) << firstName
+//		<< std::setw(15) << patronymic
+//		<< std::setw(15) << dateOfBirth
+//		<< std::setw(30) << dateOfHiring
+//		<< std::setw(30) << "" << std::endl;
+//}
+//
+//std::string ComponyConsole::AscEmployeLast()
+//{
+//	
+//		std::string LastName;
+//		std::cout << " Фамилия сотрудника" << std::endl;
+//		std::cin >> LastName;
+//		
+//		return LastName;
+//
+//}
+//std::string ComponyConsole::AscManagerLast()
+//{
+//
+//	std::string LastName;
+//	std::cout << " Фамилия Менеджера" << std::endl;
+//	std::cin >> LastName;
+//
+//	return LastName;
+//
+//}
+//
+//Position* ComponyConsole::AscPosition()
+//{
+//	
+//	std::cout << "Выберите действие: ... " << std::endl;
+//	std::cout << " 1 - добавить рабочего" << std::endl;
+//	std::cout << " 2 - добавить менеджера" << std::endl;
+//	std::cout << " 3 - добавить руководителя" << std::endl;
+//	std::cout << " 4 - добавить уборщика" << std::endl;
+//	std::cout << " 7 - Выход" << std::endl;
+//
+//	char ch;
+//	std::cin >> ch;
+//
+//	Position* pos = nullptr;
+//	switch (ch)
+//	{
+//	case '1':
+//		pos = new WorkerPosition();
+//		break;
+//	case '2':
+//		pos = new ManagerPosition();
+//		break;
+//	case '3':
+//		pos = new DirectorPosition();
+//		break;
+//	case '4':
+//		pos = new CleanerPosition();
+//		break;
+//	case '7': std::cout << "Выход...\n";
+//		return nullptr;
+//
+//	default: std::cout << "Попробуйте еще\n";
+//		return nullptr;
+//	}
+//
+//	if (!pos)
+//	{
+//		// _DEBUG_ERROR( "" );
+//		return nullptr;
+//	}
+//
+//
+//
+//	return pos;
+//}
+//
+//Employee2* ComponyConsole::MakeEmployeFromStdin(bool& askAgain)
+//{
+//	askAgain = true;
+//
+//	std::cout << "Выберите действие: ... " << std::endl;
+//	std::cout << " 1 - добавить рабочего" << std::endl;
+//	std::cout << " 2 - добавить менеджера" << std::endl;
+//	std::cout << " 3 - добавить руководителя" << std::endl;
+//	std::cout << " 4 - добавить уборщика" << std::endl;
+//	std::cout << " 7 - Выход" << std::endl;
+//
+//	char ch;
+//	std::cin >> ch;
+//
+//	Position* pos = nullptr;
+//	switch (ch)
+//	{
+//	case '1':
+//		pos = new WorkerPosition();
+//		break;
+//	case '2':
+//		pos = new ManagerPosition();
+//		break;
+//	case '3':
+//		pos = new DirectorPosition();
+//		break;
+//	case '4':
+//		pos = new CleanerPosition();
+//		break;
+//	case '7': std::cout << "Выход...\n";
+//		askAgain = false;
+//		return nullptr;
+//
+//	default: std::cout << "Попробуйте еще\n";
+//		return nullptr;
+//	}
+//
+//	if (!pos)
+//	{
+//		// _DEBUG_ERROR( "" );
+//		return nullptr;
+//	}
+//
+//	
+//	std::string stdStrLastName;
+//
+//	std::cout << " Фамилия " << std::endl;
+//	std::cin >> stdStrLastName;
+//
+//	QString lastName = toQtString(  stdStrLastName );
+//
+//
+//	std::string firstName;
+//
+//	std::cout << " Имя " << std::endl;
+//	std::cin >> firstName;
+//
+//	std::string patronymic;
+//
+//	std::cout << " Очество " << std::endl;
+//	std::cin >> patronymic;
+//
+//	std::string dateOfBirth;
+//	std::string dateOfYear;
+//	std::string dateOfMonth;
+//	std::string dateOfDay;
+//	std::cout << " Дата рождения " << std::endl;
+//	std::cout << " Год " << std::endl;
+//	std::cin >> dateOfYear;
+//	std::cout << " Месяц " << std::endl;
+//	std::cin >> dateOfMonth;
+//	std::cout << " День " << std::endl;
+//	std::cin >> dateOfDay;
+//	dateOfBirth = dateOfYear + "." + dateOfMonth + "." + dateOfDay;
+//	std::string dateOfHiring;
+//
+//	std::cout << " Дата принятия на работу " << std::endl;
+//	std::cout << " Год " << std::endl;
+//	std::cin >> dateOfYear;
+//	std::cout << " Месяц " << std::endl;
+//	std::cin >> dateOfMonth;
+//	std::cout << " День " << std::endl;
+//	std::cin >> dateOfDay;
+//	dateOfHiring = dateOfYear + "." + dateOfMonth + "." + dateOfDay;;
+//
+//
+//	return new Employee2(lastName, pos, firstName, patronymic, dateOfBirth, dateOfHiring);
+//}
 
 void File2::ReadEmplyeesList(Company2& company)
 {
@@ -588,13 +588,13 @@ void File2::ReadEmplyeesList(Company2& company)
 
 				QString lastName = toQtString( wordsVector[1] );
 
-				std::string firstName = wordsVector[2];
+				QString firstName = toQtString( wordsVector[2] );
 
-				std::string patronymic = wordsVector[3];
+				QString patronymic = toQtString( wordsVector[3] );
 
-				std::string dateOfBirth = wordsVector[4];
+				QDate dateOfBirth = QDate::fromString(toQtString(wordsVector[4]), Qt::ISODate);
 
-				std::string dateOfHiring = wordsVector[5];
+				QDate dateOfHiring = QDate::fromString(toQtString(wordsVector[5]), Qt::ISODate);
 
 
 				if (pos != nullptr)
@@ -696,7 +696,7 @@ void File2::WriteEmplyeesList(Company2& company)
 		{
 			std::string temp = "";
 			
-			temp = emp2->GetPositionName() + " " + toStdString( emp2->GetLastName() ) + " " + emp2->GetFirstName() + " " + emp2->GetPatronymic() + " " + emp2->GetDateOfBirth() + " " + emp2->GetDateOfHiring() + "\n";
+			temp = toStdString( emp2->GetPositionName() ) + " " + toStdString( emp2->GetLastName() ) + " " + toStdString( emp2->GetFirstName() )+ " " + toStdString( emp2->GetPatronymic() ) + " " + toStdString(emp2->GetDateOfBirth().toString(Qt::ISODate)) + " " + toStdString(emp2->GetDateOfHiring().toString(Qt::ISODate)) + "\n";
 			
 			fout << temp;
 			if (emp2->CanHaveSubmissed())
@@ -712,7 +712,7 @@ void File2::WriteEmplyeesList(Company2& company)
 					{
 						std::string temp3 = "";
 
-						temp3 = emp2->GetPositionName() + " " + toStdString( emp2->GetLastName() ) + " " + emp2->GetFirstName() + " " + emp2->GetPatronymic() + " " + emp2->GetDateOfBirth() + " " + emp2->GetDateOfHiring() + "\n";
+						temp3 = toStdString(emp2->GetPositionName()) + " " + toStdString(emp2->GetLastName()) + " " + toStdString(emp2->GetFirstName()) + " " + toStdString(emp2->GetPatronymic()) + " " + toStdString(emp2->GetDateOfBirth().toString(Qt::ISODate)) + " " + toStdString(emp2->GetDateOfHiring().toString(Qt::ISODate)) + "\n";
 
 						fout << temp3;
 					}

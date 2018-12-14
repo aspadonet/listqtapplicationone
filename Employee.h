@@ -3,6 +3,7 @@
 #include <string>
 #include "Position.h"
 #include <QString>
+#include <QDate>
 
 class LeaderBehavior;
 
@@ -12,21 +13,21 @@ protected:
 	Position* Pos = nullptr;
 	LeaderBehavior* LeaderBeh = nullptr;
 	QString LastName;
-	std::string FirstName;
-	std::string Patronymic;
-	std::string DateOfBirth;
-	std::string DateOfHiring;
+	QString FirstName;
+	QString Patronymic;
+	QDate DateOfBirth;
+	QDate DateOfHiring;
 
 public:
 	
-	Employee2(const QString& lastName, Position* pos, const std::string& firstName, std::string patronymic, const std::string& DateOfBirth, const std::string& DateOfHiring);
+	Employee2(const QString& lastName, Position* pos, const QString& firstName, QString patronymic, const QDate& DateOfBirth, const QDate& DateOfHiring);
 
 	QString GetLastName();
-	std::string GetFirstName();
-	std::string GetPatronymic();
-	std::string GetDateOfBirth();
-	std::string GetDateOfHiring();
-	std::string GetPositionName();
+	QString GetFirstName();
+	QString GetPatronymic();
+	QDate GetDateOfBirth();
+	QDate GetDateOfHiring();
+	QString GetPositionName();
 	void SetPositionName(Position* pos);
 	std::vector<Employee2*>  GetLeaderBehavior();
 

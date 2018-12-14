@@ -67,22 +67,22 @@ EmploeesTableWidget::EmploeesTableWidget(std::vector< Employee2* >& emplyeesList
 		for (int i = 0; i < emplyeesVec.size(); ++i) {
 
 
-			ptwi = new QTableWidgetItem(toQtString(emplyeesVec[i]->GetPositionName()));
+			ptwi = new QTableWidgetItem(emplyeesVec[i]->GetPositionName());
 			tbl2->setItem(i, 0, ptwi);
 
 			ptwi = new QTableWidgetItem(emplyeesVec[i]->GetLastName());
 			tbl2->setItem(i, 1, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetFirstName()));
+			ptwi = new QTableWidgetItem(emplyeesVec[i]->GetFirstName());
 			tbl2->setItem(i, 2, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetPatronymic()));
+			ptwi = new QTableWidgetItem(emplyeesVec[i]->GetPatronymic());
 			tbl2->setItem(i, 3, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetDateOfBirth()));
+			ptwi = new QTableWidgetItem(emplyeesVec[i]->GetDateOfBirth().toString(Qt::TextDate));
 			tbl2->setItem(i, 4, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetDateOfHiring()));
+			ptwi = new QTableWidgetItem(emplyeesVec[i]->GetDateOfHiring().toString(Qt::TextDate));
 			tbl2->setItem(i, 5, ptwi);
 	}
 }

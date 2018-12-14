@@ -24,7 +24,7 @@ private:
 	QLabel* plblDateOfBirth;
 	QDateEdit* pleDateOfBirth;
 	QLabel* plblDateOfHiring;
-	QLineEdit* pleDateOfHiring;
+	QDateEdit* pleDateOfHiring;
 	QPushButton* okBtn;
 	QPushButton* canselBtn;
 	QComboBox* cbo;

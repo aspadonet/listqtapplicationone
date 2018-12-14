@@ -48,7 +48,24 @@ Widget::Widget(QWidget *parent)
 	QObject::connect(btnGetListAssociate, &QPushButton::clicked, this, &Widget::GetListAssociate);
 	QObject::connect(btnExit, &QPushButton::clicked, this, &Widget::ExitList);
 	//lst << "First" << "Second" << "Third" << "Second" << "Third";
+	menuBaseBar = new QMenuBar;
+	menuBase = new QMenu("&Menu");
+	menuBaseBar->addMenu(menuBase);
+
+	menuBase->addAction(QString::fromLocal8Bit("Загрузить из файла"), this, &Widget::getOpenFileName);
+	menuBase->addAction(QString::fromLocal8Bit("Сохранить в файл"), this, &Widget::DelEmployee);
 	
+	menuBase->addSeparator();
+	
+	QMenu* subMenuBaseSort = new QMenu(QString::fromLocal8Bit("Сортировать"), menuBase);
+	menuBase->addMenu(subMenuBaseSort);
+	subMenuBaseSort->addAction(QString::fromLocal8Bit("&сортировать список по фамилиям"),this, &Widget::SortLastname);
+	subMenuBaseSort->addAction(QString::fromLocal8Bit("&сортировать датам принятия на работу"), this, &Widget::SortDate);
+	menuBase->addSeparator();
+	menuBase->addAction(QString::fromLocal8Bit("Выход"), this, &Widget::ExitList);
+
+	
+	//menuBaseBar.show();
 	
 	ftemp.ReadEmplyeesList(company2);
 	tbl= new QTableWidget(n, n);
@@ -67,6 +84,8 @@ Widget::Widget(QWidget *parent)
 	QObject::connect(tbl, &QTableWidget::doubleClicked, this, &Widget::GetListAssociateCM);
 
 	pvbxLayout = new QVBoxLayout;
+	//pvbxLayout->setMenuBar(menuBase);
+	//pvbxLayout->addWidget(menuBase);
     pvbxLayout->addWidget(tbl);
 	pvbxLayout->addWidget(btnAddEmployee);
 	pvbxLayout->addWidget(btnDelEmployee);
@@ -77,9 +96,9 @@ Widget::Widget(QWidget *parent)
 	pvbxLayout->addWidget(btnPrintEmployeeList);
 	pvbxLayout->addWidget(btnGetListAssociate);
 	pvbxLayout->addWidget(btnExit);
-
+	
 	setLayout(pvbxLayout);
-		
+	layout()->setMenuBar(menuBaseBar);
 	//ftemp.ReadEmplyeesList(company2);
 //	tbl->PrintEmployeeList(); //	EmploeesTableWidget
 	PrintEmployeeList();
@@ -212,7 +231,7 @@ void Widget::SortLastname()
 
 void Widget::SortDate()
 {
-	tbl->sortItems(4);
+	tbl->sortItems(5);
 }
 
 void Widget::GetListAssociate()
@@ -291,22 +310,22 @@ void Widget::GetListAssociate()
 			//
 			//		QString qStr = QString::fromLocal8Bit(cStr);
 
-			ptwi = new QTableWidgetItem(toQtString(submissed[i]->GetPositionName()));
+			ptwi = new QTableWidgetItem(submissed[i]->GetPositionName());
 			tbl->setItem(i, 0, ptwi);
 
 			ptwi = new QTableWidgetItem(submissed[i]->GetLastName());
 			tbl->setItem(i, 1, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetFirstName()));
+			ptwi = new QTableWidgetItem(submissed[i]->GetFirstName());
 			tbl->setItem(i, 2, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetPatronymic()));
+			ptwi = new QTableWidgetItem(submissed[i]->GetPatronymic());
 			tbl->setItem(i, 3, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetDateOfBirth()));
+			ptwi = new QTableWidgetItem(submissed[i]->GetDateOfBirth().toString(Qt::ISODate));
 			tbl->setItem(i, 4, ptwi);
 
-			ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetDateOfHiring()));
+			ptwi = new QTableWidgetItem(submissed[i]->GetDateOfHiring().toString(Qt::ISODate));
 			tbl->setItem(i, 5, ptwi);
 		}
 }
@@ -431,32 +450,38 @@ void Widget::PrintEmployeeList()
 	QTableWidgetItem* ptwi = nullptr;
 
 	for (int i = 0; i < emplyeesVec.size(); ++i) {
-//		std::string stdStr = emplyeesVec[i]->GetPositionName();
+//		QString stdStr = emplyeesVec[i]->GetPositionName();
 //		const char* cStr = stdStr.c_str();
 //
 //		QString qStr = QString::fromLocal8Bit(cStr);
 
-		ptwi = new QTableWidgetItem(toQtString(emplyeesVec[i]->GetPositionName()));
+		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetPositionName());
 		tbl->setItem(i, 0, ptwi);
 
 		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetLastName());
 		tbl->setItem(i, 1, ptwi);
 
-		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetFirstName()));
+		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetFirstName());
 		tbl->setItem(i, 2, ptwi);
 
-		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetPatronymic()));
+		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetPatronymic());
 		tbl->setItem(i, 3, ptwi);
 
-		ptwi = new QTableWidgetItem(QString::fromStdString( emplyeesVec[i]->GetDateOfBirth()));
+		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetDateOfBirth().toString(Qt::ISODate));
 		tbl->setItem(i, 4, ptwi);
 
-		ptwi = new QTableWidgetItem(QString::fromStdString(emplyeesVec[i]->GetDateOfHiring()));
+		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetDateOfHiring().toString(Qt::ISODate));
 		tbl->setItem(i, 5, ptwi);
 	}
 
 	
 	
+}
+
+void Widget::getOpenFileName()
+{
+	QString str = QFileDialog::getOpenFileName(this, "Open Dialog", QDir::currentPath(), "");
+
 }
 
 void Widget::ExitList()

@@ -30,14 +30,14 @@ ChangePositionDialog::ChangePositionDialog(std::vector< Employee2* > employees, 
 	{
 		Employee2* emp2 = *it;
 
-		QString PositionName = toQtString(emp2->GetPositionName());
+		QString PositionName = emp2->GetPositionName();
 		QString LastName = emp2->GetLastName();
-		QString FirstName = toQtString(emp2->GetFirstName());
-		QString Patronymic = toQtString(emp2->GetPatronymic());
-		QString DateOfBirth = toQtString(emp2->GetDateOfBirth());
-		QString DateOfHiring = toQtString(emp2->GetDateOfHiring());
+		QString FirstName = emp2->GetFirstName();
+		QString Patronymic = emp2->GetPatronymic();
+		QDate DateOfBirth = emp2->GetDateOfBirth();
+		QDate DateOfHiring = emp2->GetDateOfHiring();
 
-		QString result = PositionName + " " + LastName + " " + FirstName + " " + Patronymic + " " + DateOfBirth + " " + DateOfHiring;
+		QString result = PositionName + " " + LastName + " " + FirstName + " " + Patronymic + " " + DateOfBirth.toString(Qt::TextDate) + " " + DateOfHiring.toString(Qt::TextDate);
 		lst << result;
 
 

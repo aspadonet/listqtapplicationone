@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Employee.h"
+#include "utils.h"
 
 
-Employee2::Employee2(const QString& lastName, Position* pos, const std::string& firstName, std::string patronymic, const std::string& dateOfBirth, const std::string& dateOfHiring)
+Employee2::Employee2(const QString& lastName, Position* pos, const QString& firstName, QString patronymic, const QDate& dateOfBirth, const QDate& dateOfHiring)
 {
 	LastName = lastName;
   SetPositionName( pos );
@@ -17,34 +18,37 @@ QString Employee2::GetLastName()
 	return LastName;
 }
 
-std::string Employee2::GetFirstName()
+QString Employee2::GetFirstName()
 {
 	return FirstName;
 }
 
-std::string Employee2::GetPatronymic()
+QString Employee2::GetPatronymic()
 {
 	return Patronymic;
 }
 
-std::string Employee2::GetDateOfBirth()
+QDate Employee2::GetDateOfBirth()
 {
 	return DateOfBirth;
 }
 
-std::string Employee2::GetDateOfHiring()
+QDate Employee2::GetDateOfHiring()
 {
 	return DateOfHiring;
 }
 
-std::string Employee2::GetPositionName()
+QString Employee2::GetPositionName()
 {
 	if (Pos == nullptr)
 	{
 		std::cout << "позиция не установленна" << std::endl;
 	}
+	QString qstr = toQtString(Pos->GetName());
 
-	return Pos->GetName();
+	
+
+	return qstr;
 }
 
 void Employee2::SetPositionName(Position* newPos )
