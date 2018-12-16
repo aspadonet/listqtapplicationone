@@ -10,6 +10,7 @@
 #include "Position.h"
 
 #include "EmployeeDialog.h"
+#include "EditEmployeeDialog.h"
 #include "DeleteEmployeeDialog.h"
 #include "ChangePositionDialog.h"
 #include "AssociateAnEmployeeWithAManagerDialog.h"
@@ -23,8 +24,6 @@
 #include <map>
 Widget::Widget(QWidget *parent)
 	: QWidget(parent)
-
-
 {	
 	
 	btnAddEmployee = new QPushButton(QString::fromLocal8Bit("&добавить сотрудника"));
@@ -47,27 +46,35 @@ Widget::Widget(QWidget *parent)
 	QObject::connect(btnPrintEmployeeList, &QPushButton::clicked, this, &Widget::PrintEmployeeList);
 	QObject::connect(btnGetListAssociate, &QPushButton::clicked, this, &Widget::GetListAssociate);
 	QObject::connect(btnExit, &QPushButton::clicked, this, &Widget::ExitList);
-	//lst << "First" << "Second" << "Third" << "Second" << "Third";
+	
+		
 	menuBaseBar = new QMenuBar;
+
 	menuBase = new QMenu("&Menu");
+
 	menuBaseBar->addMenu(menuBase);
 
 	menuBase->addAction(QString::fromLocal8Bit("Загрузить из файла"), this, &Widget::getOpenFileName);
-	menuBase->addAction(QString::fromLocal8Bit("Сохранить в файл"), this, &Widget::DelEmployee);
+	menuBase->addAction(QString::fromLocal8Bit("Сохранить в файл"), this, &Widget::getSaveFileName);
+	menuBase->addAction(QString::fromLocal8Bit("Сохранить"), this, &Widget::SaveFile);
 	
 	menuBase->addSeparator();
 	
 	QMenu* subMenuBaseSort = new QMenu(QString::fromLocal8Bit("Сортировать"), menuBase);
 	menuBase->addMenu(subMenuBaseSort);
+	
 	subMenuBaseSort->addAction(QString::fromLocal8Bit("&сортировать список по фамилиям"),this, &Widget::SortLastname);
 	subMenuBaseSort->addAction(QString::fromLocal8Bit("&сортировать датам принятия на работу"), this, &Widget::SortDate);
+	
 	menuBase->addSeparator();
+	
 	menuBase->addAction(QString::fromLocal8Bit("Выход"), this, &Widget::ExitList);
 
 	
 	//menuBaseBar.show();
 	
 	ftemp.ReadEmplyeesList(company2);
+	
 	tbl= new QTableWidget(n, n);
 	//tbl->setModel(modelDevice);
 	//tbl->setColumnHidden(0, true);
@@ -81,11 +88,9 @@ Widget::Widget(QWidget *parent)
 	tbl->setContextMenuPolicy(Qt::CustomContextMenu);
 
 	QObject::connect(tbl, &QMenu::customContextMenuRequested, this, &Widget::slotCustomMenuRequested);
-	QObject::connect(tbl, &QTableWidget::doubleClicked, this, &Widget::GetListAssociateCM);
+	QObject::connect(tbl, &QTableWidget::cellDoubleClicked, this, &Widget::EditEmployee);
 
 	pvbxLayout = new QVBoxLayout;
-	//pvbxLayout->setMenuBar(menuBase);
-	//pvbxLayout->addWidget(menuBase);
     pvbxLayout->addWidget(tbl);
 	pvbxLayout->addWidget(btnAddEmployee);
 	pvbxLayout->addWidget(btnDelEmployee);
@@ -98,6 +103,7 @@ Widget::Widget(QWidget *parent)
 	pvbxLayout->addWidget(btnExit);
 	
 	setLayout(pvbxLayout);
+
 	layout()->setMenuBar(menuBaseBar);
 	//ftemp.ReadEmplyeesList(company2);
 //	tbl->PrintEmployeeList(); //	EmploeesTableWidget
@@ -111,6 +117,7 @@ Widget::~Widget()
 void Widget::slotCustomMenuRequested(QPoint pos)
 {
 	QTableWidgetItem* item = tbl->itemAt( pos );
+	
 	if (!item)
 		return;
 
@@ -120,19 +127,23 @@ void Widget::slotCustomMenuRequested(QPoint pos)
 	QMenu* popupMenu = new QMenu(this);
 
 	QAction * editDevice = new QAction(toQtString("Редактировать"), this);
+	
 	QAction * deleteDevice = new QAction(toQtString("Удалить"), this);
 	
 //	QObject::connect(editDevice, &QAction::triggered, this, [ emplyeeIndex ]()
 //	{
 //		EditEmployee( emplyeeIndex );
 //	} );
-
+	QObject::connect(editDevice, &QAction::triggered, this, &Widget::EditEmployeeCM);
+	
 	QObject::connect(deleteDevice, &QAction::triggered, this, &Widget::DelEmployeeCM);
 
 	popupMenu->addAction(editDevice);
+	
 	popupMenu->addAction(deleteDevice);
 
 	QPoint globalPos = tbl->viewport()->mapToGlobal(pos);
+	
 	popupMenu->popup( globalPos );
 }
 
@@ -158,6 +169,52 @@ void Widget::AddEmployee()
 	PrintEmployeeList();
 }
 
+void Widget::EditEmployee(int row)
+{
+	int rowthis = row;
+		
+	QTableWidgetItem* lastNameitem = tbl->item(row, 1);
+
+	QString lastName = lastNameitem->text();
+
+	Employee2* empEdit = company2.FindEmployeeByLastName2(lastName);
+
+	EditEmployeeDialog widgetEditEmployee(empEdit);
+
+	widgetEditEmployee.resize(100, 100);
+
+	//int res = widgetAddEmployee.exec();
+	//long sdf = 789;
+
+	if (QDialog::Rejected == widgetEditEmployee.exec())
+		return;
+
+	//	widgetAddEmployee.leName.getText();
+	//	Employee2 emp = widgetAddEmployee.getEmploee();
+
+	PrintEmployeeList();
+
+}
+void Widget::EditEmployeeCM()
+{
+	int row = tbl->selectionModel()->currentIndex().row();
+
+	QTableWidgetItem* lastNameitem = tbl->item(row, 1);
+
+	QString lastName = lastNameitem->text();
+
+	Employee2* empEdit = company2.FindEmployeeByLastName2(lastName);
+
+	EditEmployeeDialog widgetEditEmployee(empEdit);
+
+	widgetEditEmployee.resize(100, 100);
+
+	if (QDialog::Rejected == widgetEditEmployee.exec())
+		return;
+
+	PrintEmployeeList();
+}
+
 void Widget::DelEmployee()
 {
 	std::vector< Employee2* > employees = company2.GetEmployees();
@@ -173,7 +230,7 @@ void Widget::DelEmployee()
 	
 	company2.DeleteEmployee2(lastName);
 
-	//widgetDeleteEmployeeDialog.show();
+	PrintEmployeeList();
 }
 
 void Widget::DelEmployeeCM()
@@ -185,6 +242,8 @@ void Widget::DelEmployeeCM()
 	QString lastName = lastNameitem->text();
 	
 	company2.DeleteEmployee2(lastName);
+
+	PrintEmployeeList();
 }
 
 void Widget::ChangePosition()
@@ -208,8 +267,9 @@ void Widget::ChangePosition()
 void Widget::AssociateEmployee()
 {
 	std::vector< Employee2* > employees = company2.GetEmployees();
+	std::vector< Employee2* > employeesLeaders = company2.getAllEmployeeLeaders();
 	
-	AssociateAnEmployeeWithAManagerDialog widgetAssociateAnEmployeeWithAManagerDialog(employees);
+	AssociateAnEmployeeWithAManagerDialog widgetAssociateAnEmployeeWithAManagerDialog(employees, employeesLeaders);
 	
 	widgetAssociateAnEmployeeWithAManagerDialog.resize(100, 100);
 	
@@ -226,7 +286,6 @@ void Widget::AssociateEmployee()
 void Widget::SortLastname()
 {
 	tbl->sortItems(1);
-
 }
 
 void Widget::SortDate()
@@ -236,9 +295,8 @@ void Widget::SortDate()
 
 void Widget::GetListAssociate()
 {
-	std::vector< Employee2* > employees = company2.GetEmployees();
-	
-	// LeaderEmplyeeChooseDialog 
+	std::vector< Employee2* > employees = company2.getAllEmployeeLeaders();
+
 	GetListAssociateAnEmployeeWithAManagerDialog widgetGetListAssociateAnEmployeeWithAManagerDialog(employees);
 	
 	widgetGetListAssociateAnEmployeeWithAManagerDialog.resize(100, 110);
@@ -282,6 +340,7 @@ void Widget::GetListAssociate()
 	EmploeesTableWidget* submissedTbl = new EmploeesTableWidget(submissed, &submissedDlg);
 	
 	QVBoxLayout* layout = new QVBoxLayout();
+	
 	layout->addWidget(submissedTbl);
 
 	submissedDlg.setLayout(layout);
@@ -290,21 +349,14 @@ void Widget::GetListAssociate()
 
 	return;
 
-
-
 	tbl->setColumnCount(6);
 
 	tbl->setRowCount(submissed.size());
-
-	
 
 	QTableWidgetItem* ptwi = nullptr;
 
 	for (long i = 0; i < submissed.size(); i++)
 	{
-		
-		
-
 			//		std::string stdStr = emplyeesVec[i]->GetPositionName();
 			//		const char* cStr = stdStr.c_str();
 			//
@@ -338,12 +390,15 @@ void Widget::GetListAssociateCM()
 	QTableWidgetItem *	lastNameitem;
 
 	lastNameitem = tbl->item(row, 1);
+
 	lastNameitem->text();
 
 	QString lastName = lastNameitem->text();
+
 	QString lastNameManager = lastName;
 
 	LeaderBehavior* leader = company2.FindLeaderEmployeeByLastName(lastNameManager);
+
 	if (!leader)
 	{
 		QMessageBox msgBox;
@@ -379,6 +434,7 @@ void Widget::GetListAssociateCM()
 	EmploeesTableWidget* submissedTbl = new EmploeesTableWidget(submissed, &submissedDlg);
 
 	QVBoxLayout* layout = new QVBoxLayout();
+
 	layout->addWidget(submissedTbl);
 
 	submissedDlg.setLayout(layout);
@@ -386,44 +442,6 @@ void Widget::GetListAssociateCM()
 	submissedDlg.exec();
 
 	return;
-
-
-	//tbl->setColumnCount(6);
-
-	//tbl->setRowCount(submissed.size());
-
-
-
-	//QTableWidgetItem* ptwi = nullptr;
-
-	//for (long i = 0; i < submissed.size(); i++)
-	//{
-
-
-
-	//	//		std::string stdStr = emplyeesVec[i]->GetPositionName();
-	//	//		const char* cStr = stdStr.c_str();
-	//	//
-	//	//		QString qStr = QString::fromLocal8Bit(cStr);
-
-	//	ptwi = new QTableWidgetItem(toQtString(submissed[i]->GetPositionName()));
-	//	tbl->setItem(i, 0, ptwi);
-
-	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetLastName()));
-	//	tbl->setItem(i, 1, ptwi);
-
-	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetFirstName()));
-	//	tbl->setItem(i, 2, ptwi);
-
-	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetPatronymic()));
-	//	tbl->setItem(i, 3, ptwi);
-
-	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetDateOfBirth()));
-	//	tbl->setItem(i, 4, ptwi);
-
-	//	ptwi = new QTableWidgetItem(QString::fromStdString(submissed[i]->GetDateOfHiring()));
-	//	tbl->setItem(i, 5, ptwi);
-	//}
 }
 
 void Widget::PrintEmployeeList()
@@ -456,39 +474,65 @@ void Widget::PrintEmployeeList()
 //		QString qStr = QString::fromLocal8Bit(cStr);
 
 		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetPositionName());
+		
 		tbl->setItem(i, 0, ptwi);
 
 		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetLastName());
+		
 		tbl->setItem(i, 1, ptwi);
 
 		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetFirstName());
+		
 		tbl->setItem(i, 2, ptwi);
 
 		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetPatronymic());
+		
 		tbl->setItem(i, 3, ptwi);
 
 		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetDateOfBirth().toString(Qt::ISODate));
+		
 		tbl->setItem(i, 4, ptwi);
 
 		ptwi = new QTableWidgetItem(emplyeesVec[i]->GetDateOfHiring().toString(Qt::ISODate));
+		
 		tbl->setItem(i, 5, ptwi);
 	}
-
-	
-	
 }
 
 void Widget::getOpenFileName()
 {
-	QString str = QFileDialog::getOpenFileName(this, "Open Dialog", QDir::currentPath(), "");
+	QString qstrPath = QFileDialog::getOpenFileName(this, "Open Dialog", "", "");
+	
+	qstrPath.replace(QRegExp("/"), "\\");
+	
+	strPath = qstrPath.toStdString();
+		
+	company2.DeleteEmployeALL();
+	
+	ftemp.ReadEmplyeesList(company2, strPath);
+	
+	PrintEmployeeList();
+}
 
+void Widget::getSaveFileName()
+{
+	QString fileNamePath = QFileDialog::getSaveFileName(this,QString::fromUtf8("Сохранить файл"),QDir::currentPath(),";;All files (*.*)");
+	
+	fileNamePath.replace(QRegExp("/"), "\\");
+	
+	strPath = fileNamePath.toStdString();
+	
+	ftemp.WriteEmplyeesList(company2, strPath);
+}
+
+void Widget::SaveFile()
+{
+	ftemp.WriteEmplyeesList(company2, strPath);
 }
 
 void Widget::ExitList()
-{
-	
-	ftemp.WriteEmplyeesList(company2);
+{	
+	ftemp.WriteEmplyeesList(company2, strPath);
 	
 	QApplication::quit();
-
 }

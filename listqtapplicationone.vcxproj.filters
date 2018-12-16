@@ -43,6 +43,9 @@
     <Filter Include="Source Files\GetListAssociateAnEmployeeWithAManagerDialog">
       <UniqueIdentifier>{86a0d711-e55e-4118-a29d-bed34a376751}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\EditEmployeeDialog">
+      <UniqueIdentifier>{e9bf084f-90b4-463e-abdf-d9f995e7cfc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,6 +93,9 @@
     <ClCompile Include="EmploeesTableWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EditEmployeeDialog.cpp">
+      <Filter>Source Files\EditEmployeeDialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="listqtapplicationone.qrc">
@@ -114,6 +120,9 @@
     </QtMoc>
     <QtMoc Include="GetListAssociateAnEmployeeWithAManagerDialog.h">
       <Filter>Source Files\GetListAssociateAnEmployeeWithAManagerDialog</Filter>
+    </QtMoc>
+    <QtMoc Include="EditEmployeeDialog.h">
+      <Filter>Source Files\EditEmployeeDialog</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

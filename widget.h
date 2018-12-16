@@ -35,6 +35,7 @@ private:
 //	QStringList lst;
 	QVBoxLayout* pvbxLayout;
 	File2 ftemp;
+	std::string strPath = "FileEmplyeesList.txt";
 	std::vector< Employee2* > emplyeesVec;
 
 
@@ -45,6 +46,8 @@ public:
 private Q_SLOTS:
 	void PrintEmployeeList();
 	void AddEmployee();
+	void EditEmployee(int row);
+	void EditEmployeeCM();
 	void DelEmployee();
 	void DelEmployeeCM();
 	void ChangePosition();
@@ -56,6 +59,8 @@ private Q_SLOTS:
 	void ExitList();
 	void slotCustomMenuRequested(QPoint pos);
 	void getOpenFileName();
+	void getSaveFileName();
+	void SaveFile();
 Q_SIGNALS:
 	
 

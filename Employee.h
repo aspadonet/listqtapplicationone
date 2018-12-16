@@ -29,6 +29,7 @@ public:
 	QDate GetDateOfHiring();
 	QString GetPositionName();
 	void SetPositionName(Position* pos);
+	void SetEdit(const QString& lastName,  const QString& firstName, QString patronymic, const QDate& DateOfBirth, const QDate& DateOfHiring);
 	std::vector<Employee2*>  GetLeaderBehavior();
 
   bool CanHaveSubmissed() const;

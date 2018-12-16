@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	Widget w; // גûחמג constructor
 	
-	w.resize(1000, 800);
+	w.resize(700, 800);
 	w.show();
 
 	

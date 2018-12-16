@@ -18,6 +18,7 @@ public:
 	void DeleteEmployee(QString lastName);
 	void DeleteEmployee2(QString lastName);
 	void DeleteEmployeFromLeaders(Employee2* empl);
+	void DeleteEmployeALL();
 	void ChangePosition(QString lastName, Position* pos);
 	void AssociateAnEmployeeWithAManager(QString lastNameManager, QString lastName);
 	void GetListAssociateAnEmployeeWithAManager(QString lastNameManager);
@@ -28,6 +29,7 @@ public:
 	std::vector<Employee2*>::const_iterator FindEmployeeByLastName(const QString& lastName);
 	std::vector<Employee2*>::const_iterator FindEmployeeByDateOfHiring(const QDate& DateOfHiring);
 	std::vector< LeaderBehavior* >  getAllLeaders();
+	std::vector< Employee2* >  getAllEmployeeLeaders();
 
   Employee2* FindEmployeeByLastName2( const QString& lastName );
   LeaderBehavior* FindLeaderEmployeeByLastName( const QString& lastName );
@@ -56,7 +58,7 @@ class File2
 {
 
 public:
-	void  ReadEmplyeesList(Company2& company);
-	void  WriteEmplyeesList(Company2& company);
+	void  ReadEmplyeesList(Company2& company, std::string path = "FileEmplyeesList.txt");
+	void  WriteEmplyeesList(Company2& company, std::string path = "FileEmplyeesList.txt");
 
 };

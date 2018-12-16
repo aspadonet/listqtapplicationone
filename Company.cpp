@@ -75,6 +75,10 @@ void Company2::DeleteEmployeFromLeaders(Employee2* emp)
 	  leader->DeleteSubmissed(emp);
   }
 }
+void Company2::DeleteEmployeALL()
+{
+	employees.clear();
+}
 
 void Company2::ChangePosition(QString lastName, Position* pos)
 {
@@ -244,6 +248,25 @@ std::vector< LeaderBehavior* >  Company2::getAllLeaders()
 
 	}
 	return leaders;
+}
+
+std::vector< Employee2* >  Company2::getAllEmployeeLeaders()
+{
+	//setAllLeaders();
+	std::vector< Employee2* > employeesleaders;
+
+	for (auto it = employees.cbegin(); it != employees.cend(); it++)
+	{
+		Employee2* empl = *it;
+		if (empl->CanHaveSubmissed())
+		{
+			employeesleaders.push_back(empl);
+			//break;
+
+		}
+
+	}
+	return employeesleaders;
 }
 
 Employee2* Company2::FindEmployeeByLastName2( const QString& lastName )
@@ -521,9 +544,9 @@ int Company2::GetEmployeesCount()
 //	return new Employee2(lastName, pos, firstName, patronymic, dateOfBirth, dateOfHiring);
 //}
 
-void File2::ReadEmplyeesList(Company2& company)
+void File2::ReadEmplyeesList(Company2& company, std::string strpath)
 {
-	std::string path = "FileEmplyeesList.txt";
+	std::string path = strpath;
 	std::ifstream fin;
 	fin.open(path);
 	if (!fin.is_open())
@@ -681,9 +704,9 @@ void File2::ReadEmplyeesList(Company2& company)
 	fin.close();
 
 }
-void File2::WriteEmplyeesList(Company2& company)
+void File2::WriteEmplyeesList(Company2& company, std::string strpath)
 {
-	std::string path = "FileEmplyeesList.txt";
+	std::string path = strpath;
 	std::ofstream fout;
 	fout.open(path);// , std::ofstream::app);
 	if (!fout.is_open())

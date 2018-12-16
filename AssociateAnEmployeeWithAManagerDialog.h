@@ -12,7 +12,7 @@ class AssociateAnEmployeeWithAManagerDialog : public QDialog
 	Q_OBJECT
 
 public:
-	AssociateAnEmployeeWithAManagerDialog(std::vector< Employee2* > employees, QWidget* parrent = nullptr);
+	AssociateAnEmployeeWithAManagerDialog(std::vector< Employee2* > employees, std::vector< Employee2* > employeesLeaders, QWidget* parrent = nullptr);
 	QString toQtString(const std::string& s);
 	QString getLastNameManager();
 	QString getLastName();

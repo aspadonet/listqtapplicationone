@@ -50,6 +50,15 @@ QString Employee2::GetPositionName()
 
 	return qstr;
 }
+void Employee2::SetEdit(const QString& lastName, const QString& firstName, QString patronymic, const QDate& dateOfBirth, const QDate& dateOfHiring)
+{
+	LastName = lastName;
+	FirstName = firstName;
+	Patronymic = patronymic;
+	DateOfBirth = dateOfBirth;
+	DateOfHiring = dateOfHiring;
+}
+
 
 void Employee2::SetPositionName(Position* newPos )
 {

@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <sstream>
 
-AssociateAnEmployeeWithAManagerDialog::AssociateAnEmployeeWithAManagerDialog(std::vector< Employee2* > employees, QWidget* parent)
+AssociateAnEmployeeWithAManagerDialog::AssociateAnEmployeeWithAManagerDialog(std::vector< Employee2* > employees, std::vector< Employee2* > employeesLeaders, QWidget* parent)
 {
 	vBxoLayouot = new QVBoxLayout();
 	
@@ -23,7 +23,7 @@ AssociateAnEmployeeWithAManagerDialog::AssociateAnEmployeeWithAManagerDialog(std
 	
 	cboPos = new QComboBox();
 	
-	for (auto it = employees.cbegin(); it != employees.cend(); it++)
+	for (auto it = employeesLeaders.cbegin(); it != employeesLeaders.cend(); it++)
 	{
 		Employee2* emp2 = *it;
 
