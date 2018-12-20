@@ -10,6 +10,8 @@
 #include "Company.h"
 #include "EmploeesTableWidget.h"
 #include <QFileDialog>
+#include <QtSql>
+
 
 class Widget : public QWidget
 {
@@ -61,6 +63,12 @@ private Q_SLOTS:
 	void getOpenFileName();
 	void getSaveFileName();
 	void SaveFile();
+	void SaveXMLFile();
+	void ReadXMLFile();
+	//void SaveSqlFile();
+	//void ReadSqlFile();
+	void tempFromFile(const QString& lastName, std::string pos, const QString& firstName, QString patronymic, const QDate& dateOfBirth, const QDate& dateOfHiring);
+	
 Q_SIGNALS:
 	
 

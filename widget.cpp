@@ -4,7 +4,10 @@
 #include <QtWidgets>
 
 #include "utils.h"
-
+#include <QFile>
+#include <QXmlStreamAttribute>
+#include <QXmlStreamWriter>
+#include <QXmlStreamWriter>
 #include "Employee.h"
 #include "File.h"
 #include "Position.h"
@@ -54,10 +57,23 @@ Widget::Widget(QWidget *parent)
 
 	menuBaseBar->addMenu(menuBase);
 
-	menuBase->addAction(QString::fromLocal8Bit("Загрузить из файла"), this, &Widget::getOpenFileName);
-	menuBase->addAction(QString::fromLocal8Bit("Сохранить в файл"), this, &Widget::getSaveFileName);
-	menuBase->addAction(QString::fromLocal8Bit("Сохранить"), this, &Widget::SaveFile);
+	menuBase->addAction(QString::fromLocal8Bit("Загрузить из файла *.txt"), this, &Widget::getOpenFileName);
+	menuBase->addAction(QString::fromLocal8Bit("Сохранить в файл *.txt"), this, &Widget::getSaveFileName);
+
+	menuBase->addAction(QString::fromLocal8Bit("Сохранить изменения в *.txt"), this, &Widget::SaveFile);
+
+	menuBase->addSeparator();
 	
+	menuBase->addAction(QString::fromLocal8Bit("Загрузить из файла *.xml"), this, &Widget::ReadXMLFile);
+	menuBase->addAction(QString::fromLocal8Bit("Сохранить в файл *.xml"), this, &Widget::SaveXMLFile);
+	
+
+	//menuBase->addSeparator();
+
+	//menuBase->addAction(QString::fromLocal8Bit("Загрузить из файла *.xml"), this, &Widget::ReadSqlFile);
+	//menuBase->addAction(QString::fromLocal8Bit("Сохранить в файл *.xml"), this, &Widget::SaveSqlFile);
+
+
 	menuBase->addSeparator();
 	
 	QMenu* subMenuBaseSort = new QMenu(QString::fromLocal8Bit("Сортировать"), menuBase);
@@ -528,6 +544,318 @@ void Widget::getSaveFileName()
 void Widget::SaveFile()
 {
 	ftemp.WriteEmplyeesList(company2, strPath);
+}
+
+void Widget::SaveXMLFile()
+{
+
+	QString filename = QFileDialog::getSaveFileName(this,
+		tr("Save Xml"), ".",
+		tr("Xml files (*.xml)"));
+
+
+	QFile file(filename);
+	file.open(QIODevice::WriteOnly);
+
+	QXmlStreamWriter xmlWriter(&file);
+	xmlWriter.setAutoFormatting(true);
+	xmlWriter.writeStartDocument();
+
+	xmlWriter.writeStartElement("ONE");
+
+		for (Employee2* emp2 : company2.GetEmployees())
+		{
+			xmlWriter.writeStartElement("Employee");
+			xmlWriter.writeTextElement("PositionName", (emp2->GetPositionName()));
+			xmlWriter.writeTextElement("LastName", (emp2->GetLastName()));
+			xmlWriter.writeTextElement("FistName", (emp2->GetFirstName()));
+			xmlWriter.writeTextElement("Patronymic", (emp2->GetPatronymic()));
+			xmlWriter.writeTextElement("DateOfBirth", (emp2->GetDateOfBirth().toString(Qt::ISODate)));
+			xmlWriter.writeTextElement("DateOfHiring", (emp2->GetDateOfHiring().toString(Qt::ISODate)));
+			
+			if (emp2->CanHaveSubmissed())
+			{
+				if (!emp2->GetLeaderBehavior2()->getSubmissed().empty())
+				{
+
+					
+					xmlWriter.writeStartElement("open");
+					
+					std::vector <Employee2*> EmpAssociate = emp2->GetLeaderBehavior2()->getSubmissed();
+					for (Employee2* emp2 : EmpAssociate)
+					{
+						xmlWriter.writeTextElement("PositionName", (emp2->GetPositionName()));
+						xmlWriter.writeTextElement("LastName", (emp2->GetLastName()));
+						xmlWriter.writeTextElement("FistName", (emp2->GetFirstName()));
+						xmlWriter.writeTextElement("Patronymic", (emp2->GetPatronymic()));
+						xmlWriter.writeTextElement("DateOfBirth", (emp2->GetDateOfBirth().toString(Qt::ISODate)));
+						xmlWriter.writeTextElement("DateOfHiring", (emp2->GetDateOfHiring().toString(Qt::ISODate)));
+					}
+					//temp2 = "Close Associate An Employee With " + toStdString(emp2->GetLastName()) + "\n";
+					xmlWriter.writeEndElement();
+				}
+			}
+
+			xmlWriter.writeEndElement();
+		}
+	xmlWriter.writeEndElement();
+
+
+
+	file.close();
+}
+void Widget::ReadXMLFile()
+{
+	company2.DeleteEmployeALL();
+
+	QXmlStreamReader Rxml;
+
+	QString filename = QFileDialog::getOpenFileName(this,
+		tr("Open Xml"), ".",
+		tr("Xml files (*.xml)"));
+
+	QFile file(filename);
+	if (!file.open(QFile::ReadOnly | QFile::Text))
+	{
+		std::cerr << "Error: Cannot read file " << qPrintable(filename)
+			<< ": " << qPrintable(file.errorString())
+			<< std::endl;
+
+	}
+
+	Rxml.setDevice(&file);
+	Rxml.readNext();
+	QString PositionName;
+	std::string pos;
+	QString LastName;
+	QString FistName;
+	QString nameLider;
+	QString Patronymic;
+	QDate DateOfBirth;
+	QDate DateOfHiring;
+
+
+
+
+	while (!Rxml.atEnd())
+	{
+		if (Rxml.isStartElement())
+		{
+			if (Rxml.name() == "ONE")
+			{
+				Rxml.readNext();
+			}
+			else if (Rxml.name() == "Employee")
+			{
+				Rxml.readNext();
+				while (!Rxml.atEnd())
+				{
+					if (Rxml.isEndElement())
+					{
+						Rxml.readNext();
+						break;
+					}
+
+					else if (Rxml.isStartElement())
+					{
+						if (Rxml.name() == "PositionName")
+						{
+							PositionName = Rxml.readElementText();
+							pos = toStdString(PositionName);
+							Rxml.readNext();
+							Rxml.readNext();
+							if (Rxml.name() == "LastName")
+							{
+								LastName = Rxml.readElementText();
+								Rxml.readNext();
+								Rxml.readNext();
+								if (Rxml.name() == "FistName")
+								{
+									FistName = Rxml.readElementText();
+									Rxml.readNext();
+									Rxml.readNext();
+									if (Rxml.name() == "Patronymic")
+									{
+										Patronymic = Rxml.readElementText();
+										Rxml.readNext();
+										Rxml.readNext();
+										if (Rxml.name() == "DateOfBirth")
+										{
+											DateOfBirth = QDate::fromString((Rxml.readElementText()), Qt::ISODate);
+											Rxml.readNext();
+											Rxml.readNext();
+											if (Rxml.name() == "DateOfHiring")
+											{
+												DateOfHiring = QDate::fromString((Rxml.readElementText()), Qt::ISODate);
+												tempFromFile(LastName, pos, FistName, Patronymic, DateOfBirth, DateOfHiring);
+												Rxml.readNext();
+												Rxml.readNext();
+												QStringRef tem = Rxml.text();
+												if (Rxml.name() == "open")
+												{
+													nameLider = LastName;
+													Rxml.readNext();
+													while (!Rxml.atEnd())
+													{
+														if (Rxml.isEndElement())
+														{
+															Rxml.readNext();
+															break;
+														}
+
+														else if (Rxml.isStartElement())
+														{
+															if (Rxml.name() == "PositionName")
+															{
+																PositionName = Rxml.readElementText();
+																pos = toStdString(PositionName);
+																Rxml.readNext();
+																Rxml.readNext();
+																if (Rxml.name() == "LastName")
+																{
+																	LastName = Rxml.readElementText();
+																	Rxml.readNext();
+																	Rxml.readNext();
+																	if (Rxml.name() == "FistName")
+																	{
+																		FistName = Rxml.readElementText();
+																		Rxml.readNext();
+																		Rxml.readNext();
+																		if (Rxml.name() == "Patronymic")
+																		{
+																			Patronymic = Rxml.readElementText();
+																			Rxml.readNext();
+																			Rxml.readNext();
+																			if (Rxml.name() == "DateOfBirth")
+																			{
+																				DateOfBirth = QDate::fromString((Rxml.readElementText()), Qt::ISODate);
+																				Rxml.readNext();
+																				Rxml.readNext();
+																				if (Rxml.name() == "DateOfHiring")
+																				{
+																					DateOfHiring = QDate::fromString((Rxml.readElementText()), Qt::ISODate);
+																					tempFromFile(LastName, pos, FistName, Patronymic, DateOfBirth, DateOfHiring);
+																					company2.AssociateAnEmployeeWithAManager(nameLider, LastName);
+																					Rxml.readNext();
+																					Rxml.readNext();
+
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+
+
+
+														}
+														else
+														{
+															Rxml.readNext();
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}//Rxml.readNext();
+
+
+
+					}
+					else
+					{
+						Rxml.readNext();
+					}
+				}
+			}
+			else
+				{
+				Rxml.readNext();
+				}
+		}
+		else
+		{
+			Rxml.readNext();
+		}
+	}
+		file.close();
+
+		if (Rxml.hasError())
+		{
+			std::cerr << "Error: Failed to parse file "
+				<< qPrintable(filename) << ": "
+				<< qPrintable(Rxml.errorString()) << std::endl;
+		}
+		else if (file.error() != QFile::NoError)
+		{
+			std::cerr << "Error: Cannot read file " << qPrintable(filename)
+				<< ": " << qPrintable(file.errorString())
+				<< std::endl;
+		}
+	
+}
+
+//void Widget::SaveSqlFile()
+//{
+//	QString filename = QFileDialog::getSaveFileName(this,
+//		tr("Save Sql"), ".",
+//		tr("Sql files (*.sql)"));
+//
+//
+//	QFile file(filename);
+//	file.open(QIODevice::WriteOnly);
+//
+//
+//
+//}
+//void Widget::ReadSqlFile()
+//{
+//
+//}
+
+void Widget::tempFromFile(const QString& lastName, std::string ch, const QString& firstName, QString patronymic, const QDate& dateOfBirth, const QDate& dateOfHiring)
+{
+	Position* pos = nullptr;
+
+	if ("Рабочий" == ch)
+	{
+		pos = new WorkerPosition();
+	}
+	else if ("Менеджер" == ch)
+	{
+		pos = new ManagerPosition();
+	}
+	else if ("Директор" == ch)
+	{
+		pos = new DirectorPosition();
+	}
+	else if ("Уборщик" == ch)
+	{
+		pos = new CleanerPosition();
+	}
+	else
+	{
+		//std::cout << "Попробуйте mmmmmmmmmmmmmmеще\n";
+
+	}
+
+	if (!pos)
+	{
+
+		//std::cout << "pos = nullptr\n";
+		pos = nullptr;
+		//break;
+
+	}
+
+	if (pos != nullptr)
+	{
+		company2.AddEmployeeFromFile(new Employee2(lastName, pos, firstName, patronymic, dateOfBirth, dateOfHiring));
+
+	}
 }
 
 void Widget::ExitList()

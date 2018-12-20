@@ -1,140 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
-      <Extensions>qrc;*</Extensions>
-      <ParseFiles>false</ParseFiles>
-    </Filter>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
-      <Extensions>qrc;*</Extensions>
-      <ParseFiles>false</ParseFiles>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
     </Filter>
     <Filter Include="Generated Files">
       <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
-      <Extensions>moc;h;cpp</Extensions>
-      <SourceControlFiles>False</SourceControlFiles>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
     </Filter>
-    <Filter Include="Source Files\EployeeDialog">
-      <UniqueIdentifier>{4e946865-be02-4d2d-819f-9b1819649341}</UniqueIdentifier>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\DeleteEmployeeDialog">
-      <UniqueIdentifier>{c2ca394e-1d9c-468d-8b36-bdd35eee4f5e}</UniqueIdentifier>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\ChangePositionDialog">
-      <UniqueIdentifier>{00ab4462-bf8a-4b72-a9c5-7c7d12bc03d3}</UniqueIdentifier>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Source Files\AssociateAnEmployeeWithAManagerDialog">
-      <UniqueIdentifier>{7b95a5bf-6170-41b9-95fb-0da93028656a}</UniqueIdentifier>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Source Files\GetListAssociateAnEmployeeWithAManagerDialog">
-      <UniqueIdentifier>{86a0d711-e55e-4118-a29d-bed34a376751}</UniqueIdentifier>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Source Files\EditEmployeeDialog">
-      <UniqueIdentifier>{e9bf084f-90b4-463e-abdf-d9f995e7cfc4}</UniqueIdentifier>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="AssociateAnEmployeeWithAManagerDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="widget.cpp">
+    <ClCompile Include="ChangePositionDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Company.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Employee.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="File.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="listfirm2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Position.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EmployeeDialog.cpp">
-      <Filter>Source Files\EployeeDialog</Filter>
-    </ClCompile>
     <ClCompile Include="DeleteEmployeeDialog.cpp">
-      <Filter>Source Files\DeleteEmployeeDialog</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChangePositionDialog.cpp">
-      <Filter>Source Files\ChangePositionDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="AssociateAnEmployeeWithAManagerDialog.cpp">
-      <Filter>Source Files\AssociateAnEmployeeWithAManagerDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="GetListAssociateAnEmployeeWithAManagerDialog.cpp">
-      <Filter>Source Files\GetListAssociateAnEmployeeWithAManagerDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="utils.cpp">
+    <ClCompile Include="EditEmployeeDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EmploeesTableWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditEmployeeDialog.cpp">
-      <Filter>Source Files\EditEmployeeDialog</Filter>
+    <ClCompile Include="Employee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeeDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetListAssociateAnEmployeeWithAManagerDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Position.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="listfirm2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="widget.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="listqtapplicationone.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="widget.h">
+    <QtMoc Include="AssociateAnEmployeeWithAManagerDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="EmployeeDialog.h">
-      <Filter>Source Files\EployeeDialog</Filter>
-    </QtMoc>
-    <QtMoc Include="DeleteEmployeeDialog.h">
-      <Filter>Source Files\DeleteEmployeeDialog</Filter>
-    </QtMoc>
     <QtMoc Include="ChangePositionDialog.h">
-      <Filter>Source Files\ChangePositionDialog</Filter>
+      <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="AssociateAnEmployeeWithAManagerDialog.h">
-      <Filter>Source Files\AssociateAnEmployeeWithAManagerDialog</Filter>
-    </QtMoc>
-    <QtMoc Include="GetListAssociateAnEmployeeWithAManagerDialog.h">
-      <Filter>Source Files\GetListAssociateAnEmployeeWithAManagerDialog</Filter>
+    <ClInclude Include="Company.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="DeleteEmployeeDialog.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="EditEmployeeDialog.h">
-      <Filter>Source Files\EditEmployeeDialog</Filter>
+      <Filter>Header Files</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Company.h">
+    <ClInclude Include="EmploeesTableWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Employee.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <QtMoc Include="EmployeeDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <ClInclude Include="File.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <QtMoc Include="GetListAssociateAnEmployeeWithAManagerDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <ClInclude Include="Position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -147,8 +129,16 @@
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EmploeesTableWidget.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
+    <QtMoc Include="widget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="listqtapplicationone.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="listqtapplicationone.pro" />
   </ItemGroup>
 </Project>
