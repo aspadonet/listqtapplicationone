@@ -68,7 +68,10 @@ void Employee2::SetPositionName(Position* newPos )
     LeaderBeh = nullptr;
   }
 
-	Pos = newPos;
+  if (Pos)
+	  delete Pos;
+
+  Pos = newPos;
 
   if( !LeaderBeh && Pos->CanHaveSubmissed() )
   {

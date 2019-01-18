@@ -65,8 +65,8 @@ private Q_SLOTS:
 	void SaveFile();
 	void SaveXMLFile();
 	void ReadXMLFile();
-	//void SaveSqlFile();
-	//void ReadSqlFile();
+	void SaveSqlFile();
+	void ReadSqlFile();
 	void tempFromFile(const QString& lastName, std::string pos, const QString& firstName, QString patronymic, const QDate& dateOfBirth, const QDate& dateOfHiring);
 	
 Q_SIGNALS:

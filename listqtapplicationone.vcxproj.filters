@@ -85,6 +85,12 @@
     <ClCompile Include="widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="XMLFileReadWrite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SqlFileSaveWrite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AssociateAnEmployeeWithAManagerDialog.h">
@@ -140,5 +146,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="listqtapplicationone.pro" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="XMLFileReadWrite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SqlFileSaveWrite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

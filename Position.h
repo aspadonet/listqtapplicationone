@@ -1,4 +1,5 @@
 #pragma once
+#include <QString>
 
 class Position
 {
@@ -6,6 +7,8 @@ public:
 	virtual std::string GetName() = 0;
 
 	virtual bool CanHaveSubmissed();
+
+	static Position* Create(std::string posName);
 };
 
 class LeaderPosition : public Position

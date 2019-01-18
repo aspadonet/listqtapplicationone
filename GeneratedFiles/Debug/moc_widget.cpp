@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Widget_t {
-    QByteArrayData data[30];
-    char stringdata0[369];
+    QByteArrayData data[32];
+    char stringdata0[393];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -54,13 +54,15 @@ QT_MOC_LITERAL(19, 240, 15), // "getSaveFileName"
 QT_MOC_LITERAL(20, 256, 8), // "SaveFile"
 QT_MOC_LITERAL(21, 265, 11), // "SaveXMLFile"
 QT_MOC_LITERAL(22, 277, 11), // "ReadXMLFile"
-QT_MOC_LITERAL(23, 289, 12), // "tempFromFile"
-QT_MOC_LITERAL(24, 302, 8), // "lastName"
-QT_MOC_LITERAL(25, 311, 11), // "std::string"
-QT_MOC_LITERAL(26, 323, 9), // "firstName"
-QT_MOC_LITERAL(27, 333, 10), // "patronymic"
-QT_MOC_LITERAL(28, 344, 11), // "dateOfBirth"
-QT_MOC_LITERAL(29, 356, 12) // "dateOfHiring"
+QT_MOC_LITERAL(23, 289, 11), // "SaveSqlFile"
+QT_MOC_LITERAL(24, 301, 11), // "ReadSqlFile"
+QT_MOC_LITERAL(25, 313, 12), // "tempFromFile"
+QT_MOC_LITERAL(26, 326, 8), // "lastName"
+QT_MOC_LITERAL(27, 335, 11), // "std::string"
+QT_MOC_LITERAL(28, 347, 9), // "firstName"
+QT_MOC_LITERAL(29, 357, 10), // "patronymic"
+QT_MOC_LITERAL(30, 368, 11), // "dateOfBirth"
+QT_MOC_LITERAL(31, 380, 12) // "dateOfHiring"
 
     },
     "Widget\0PrintEmployeeList\0\0AddEmployee\0"
@@ -71,9 +73,9 @@ QT_MOC_LITERAL(29, 356, 12) // "dateOfHiring"
     "ExitList\0slotCustomMenuRequested\0pos\0"
     "getOpenFileName\0getSaveFileName\0"
     "SaveFile\0SaveXMLFile\0ReadXMLFile\0"
-    "tempFromFile\0lastName\0std::string\0"
-    "firstName\0patronymic\0dateOfBirth\0"
-    "dateOfHiring"
+    "SaveSqlFile\0ReadSqlFile\0tempFromFile\0"
+    "lastName\0std::string\0firstName\0"
+    "patronymic\0dateOfBirth\0dateOfHiring"
 };
 #undef QT_MOC_LITERAL
 
@@ -83,7 +85,7 @@ static const uint qt_meta_data_Widget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      20,   14, // methods
+      22,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -91,26 +93,28 @@ static const uint qt_meta_data_Widget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  114,    2, 0x08 /* Private */,
-       3,    0,  115,    2, 0x08 /* Private */,
-       4,    1,  116,    2, 0x08 /* Private */,
-       6,    0,  119,    2, 0x08 /* Private */,
-       7,    0,  120,    2, 0x08 /* Private */,
-       8,    0,  121,    2, 0x08 /* Private */,
-       9,    0,  122,    2, 0x08 /* Private */,
-      10,    0,  123,    2, 0x08 /* Private */,
-      11,    0,  124,    2, 0x08 /* Private */,
-      12,    0,  125,    2, 0x08 /* Private */,
-      13,    0,  126,    2, 0x08 /* Private */,
-      14,    0,  127,    2, 0x08 /* Private */,
-      15,    0,  128,    2, 0x08 /* Private */,
-      16,    1,  129,    2, 0x08 /* Private */,
-      18,    0,  132,    2, 0x08 /* Private */,
-      19,    0,  133,    2, 0x08 /* Private */,
-      20,    0,  134,    2, 0x08 /* Private */,
-      21,    0,  135,    2, 0x08 /* Private */,
-      22,    0,  136,    2, 0x08 /* Private */,
-      23,    6,  137,    2, 0x08 /* Private */,
+       1,    0,  124,    2, 0x08 /* Private */,
+       3,    0,  125,    2, 0x08 /* Private */,
+       4,    1,  126,    2, 0x08 /* Private */,
+       6,    0,  129,    2, 0x08 /* Private */,
+       7,    0,  130,    2, 0x08 /* Private */,
+       8,    0,  131,    2, 0x08 /* Private */,
+       9,    0,  132,    2, 0x08 /* Private */,
+      10,    0,  133,    2, 0x08 /* Private */,
+      11,    0,  134,    2, 0x08 /* Private */,
+      12,    0,  135,    2, 0x08 /* Private */,
+      13,    0,  136,    2, 0x08 /* Private */,
+      14,    0,  137,    2, 0x08 /* Private */,
+      15,    0,  138,    2, 0x08 /* Private */,
+      16,    1,  139,    2, 0x08 /* Private */,
+      18,    0,  142,    2, 0x08 /* Private */,
+      19,    0,  143,    2, 0x08 /* Private */,
+      20,    0,  144,    2, 0x08 /* Private */,
+      21,    0,  145,    2, 0x08 /* Private */,
+      22,    0,  146,    2, 0x08 /* Private */,
+      23,    0,  147,    2, 0x08 /* Private */,
+      24,    0,  148,    2, 0x08 /* Private */,
+      25,    6,  149,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -132,7 +136,9 @@ static const uint qt_meta_data_Widget[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 25, QMetaType::QString, QMetaType::QString, QMetaType::QDate, QMetaType::QDate,   24,   17,   26,   27,   28,   29,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 27, QMetaType::QString, QMetaType::QString, QMetaType::QDate, QMetaType::QDate,   26,   17,   28,   29,   30,   31,
 
        0        // eod
 };
@@ -162,7 +168,9 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 16: _t->SaveFile(); break;
         case 17: _t->SaveXMLFile(); break;
         case 18: _t->ReadXMLFile(); break;
-        case 19: _t->tempFromFile((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< std::string(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< const QDate(*)>(_a[5])),(*reinterpret_cast< const QDate(*)>(_a[6]))); break;
+        case 19: _t->SaveSqlFile(); break;
+        case 20: _t->ReadSqlFile(); break;
+        case 21: _t->tempFromFile((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< std::string(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< const QDate(*)>(_a[5])),(*reinterpret_cast< const QDate(*)>(_a[6]))); break;
         default: ;
         }
     }
@@ -193,13 +201,13 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 20)
+        if (_id < 22)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 20;
+        _id -= 22;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 20)
+        if (_id < 22)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 20;
+        _id -= 22;
     }
     return _id;
 }

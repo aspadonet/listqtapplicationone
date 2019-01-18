@@ -10,6 +10,7 @@ class LeaderBehavior;
 class Employee2
 {
 protected:
+	long Id;
 	Position* Pos = nullptr;
 	LeaderBehavior* LeaderBeh = nullptr;
 	QString LastName;
