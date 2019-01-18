@@ -11,6 +11,13 @@ XMLFileReadWrite::~XMLFileReadWrite()
 }
 
 
+//#define FIRST_NAME "FirstName"
+//
+//namespace
+//{
+//	const char* cFirstName = "FirstName";
+//}
+
 
 void XMLFileReadWrite::WriterXMLFile()
 {
@@ -25,7 +32,7 @@ void XMLFileReadWrite::WriterXMLFile()
 		xmlWriter.writeStartElement("Employee");
 		xmlWriter.writeTextElement("PositionName", (emp2->GetPositionName()));
 		xmlWriter.writeTextElement("LastName", (emp2->GetLastName()));
-		xmlWriter.writeTextElement("FistName", (emp2->GetFirstName()));
+		xmlWriter.writeTextElement("FirstName", (emp2->GetFirstName()));
 		xmlWriter.writeTextElement("Patronymic", (emp2->GetPatronymic()));
 		xmlWriter.writeTextElement("DateOfBirth", (emp2->GetDateOfBirth().toString(Qt::ISODate)));
 		xmlWriter.writeTextElement("DateOfHiring", (emp2->GetDateOfHiring().toString(Qt::ISODate)));
@@ -67,6 +74,8 @@ void XMLFileReadWrite::ReadXMLFile()
 {
 	//companyXML.DeleteEmployeALL();
 
+	submissedToMananger.clear();
+
 	QXmlStreamReader Rxml;
 
 	Rxml.setDevice(filexml);
@@ -86,7 +95,7 @@ void XMLFileReadWrite::readONE(QXmlStreamReader& xml )
 {
 	Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("ONE"));
 
-	while (xml.readNextStartElement())
+	while (xml.readNextStartElement()) // Employee
 	{
 		if (xml.name() == QLatin1String("Employee"))
 			readEmployee( xml );
@@ -97,6 +106,14 @@ void XMLFileReadWrite::readONE(QXmlStreamReader& xml )
 		}
 	}
 
+
+	for (auto it = submissedToMananger.begin(); it != submissedToMananger.begin(); ++it)
+	{
+		QString submissed = it->first;
+		QString manager = it->second;
+
+		companyXML->AssociateAnEmployeeWithAManager(manager, submissed);
+	}
 }
 
 void XMLFileReadWrite::readEmployee(QXmlStreamReader& xml)
@@ -110,17 +127,19 @@ void XMLFileReadWrite::readEmployee(QXmlStreamReader& xml)
 	QDate DateOfBirth;
 	QDate DateOfHiring;
 	Position* pos = nullptr;
-	//std::vector< Employee2 > submissedEmployes;
+	std::vector< Employee2 > submissedEmployes;
 
-	while (xml.readNextStartElement())
+	while (xml.readNextStartElement()) // PositionName, LastName, ..., SubmissedEmployes
 	{
+		submissedEmployes.clear();
+
 		bool anyFiledReaded = readPosition(xml, &pos)
 			|| readTextField(xml, "LastName", empLastName)
 			|| readTextField(xml, "FistName", empFirstName)
 			|| readTextField(xml, "Patronymic", empPatronimic)
 			|| readDateElem(xml, "DateOfBirth", DateOfBirth)
-			|| readDateElem(xml, "DateOfHiring", DateOfHiring);
-		//	|| readSubmissedEmployes(xml, "SubmissedEmployes" , empLastName);
+			|| readDateElem(xml, "DateOfHiring", DateOfHiring)
+			|| readSubmissedEmployes(xml, "SubmissedEmployes" , submissedEmployes);
 
 		if( !anyFiledReaded ){
 			// генерим исключение
@@ -134,6 +153,11 @@ void XMLFileReadWrite::readEmployee(QXmlStreamReader& xml)
 
 	Employee2* emp = new Employee2( empLastName, pos, empFirstName, empPatronimic, DateOfBirth, DateOfHiring);
 	companyXML->AddEmployeeFromFile(emp);
+
+	for (Employee2 submissed : submissedEmployes)
+	{
+		submissedToMananger[submissed.GetLastName()] = empLastName;
+	}
 
 	/*if (SubmissedEmployes == "SubmissedEmployes")
 	{
@@ -217,40 +241,52 @@ bool XMLFileReadWrite::readDateElem(QXmlStreamReader& xml, const char* name, QDa
 	//xml.readNextStartElement();
 	return true;
 }
-bool XMLFileReadWrite::readSubmissedEmployes(QXmlStreamReader& xml, const char* name, QString& filed)
+bool XMLFileReadWrite::readSubmissedEmployes(QXmlStreamReader& xml, const char* name, std::vector< Employee2>& submissedEmpVec )
 {
-	xml.readNextStartElement();
-	QString empLastName;
-	QString empFirstName;
-	QString empPatronimic;
-	QString SubmissedEmployes;
-	QDate DateOfBirth;
-	QDate DateOfHiring;
-	Position* pos = nullptr;
-	//std::vector< Employee2 > submissedEmployes;
-
-	while (xml.readNextStartElement())
+	while (xml.readNextStartElement()) // Employee
 	{
-		bool anyFiledReaded = readPosition(xml, &pos)
-			|| readTextField(xml, "LastName", empLastName)
-			|| readTextField(xml, "FistName", empFirstName)
-			|| readTextField(xml, "Patronymic", empPatronimic)
-			|| readDateElem(xml, "DateOfBirth", DateOfBirth)
-			|| readDateElem(xml, "DateOfHiring", DateOfHiring)
-			|| readSubmissedEmployes(xml, "SubmissedEmployes", empLastName);
 
-		if (!anyFiledReaded) {
-			// генерим исключение
-			xml.skipCurrentElement();
-			//readNextStartElement
+		QString empLastName;
+		QString empFirstName;
+		QString empPatronimic;
+		QString SubmissedEmployes;
+		QDate DateOfBirth;
+		QDate DateOfHiring;
+		Position* pos = nullptr;
+		//std::vector< Employee2 > submissedEmployes;
+
+		while (xml.readNextStartElement()) // PositionName, LastName, ...
+		{
+			bool anyFiledReaded = readPosition(xml, &pos)
+				|| readTextField(xml, "LastName", empLastName)
+				|| readTextField(xml, "FirstName", empFirstName)
+				|| readTextField(xml, "Patronymic", empPatronimic)
+				|| readDateElem(xml, "DateOfBirth", DateOfBirth)
+				|| readDateElem(xml, "DateOfHiring", DateOfHiring);
+			//			|| readSubmissedEmployes(xml, "SubmissedEmployes", empLastName);
+
+			if (!anyFiledReaded) {
+				// генерим исключение
+				xml.skipCurrentElement();
+				//readNextStartElement
+			}
 		}
+
+		if (empLastName.isEmpty() || DateOfHiring.isNull())
+			throw std::logic_error("wrong xml");
+
+		Employee2 emp(empLastName, pos, empFirstName, empPatronimic, DateOfBirth, DateOfHiring);
+//		companyXML->AddEmployeeFromFile(emp);
+
+		submissedEmpVec.push_back(emp);
+
 	}
 
-	if (empLastName.isEmpty() || DateOfHiring.isNull())
-		throw std::logic_error("wrong xml");
+//	if (!companyXML->AddEmployeeFromFile(emp))
+//	{
+//		delete emp;
+//	}
 
-	Employee2* emp = new Employee2(empLastName, pos, empFirstName, empPatronimic, DateOfBirth, DateOfHiring);
-	companyXML->AddEmployeeFromFile(emp);
-	companyXML->AssociateAnEmployeeWithAManager(filed, empLastName);
+//	companyXML->AssociateAnEmployeeWithAManager(filed, empLastName);
 	return true;
 }
