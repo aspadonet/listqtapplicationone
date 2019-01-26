@@ -3,115 +3,125 @@
     <Employee>
         <PositionName>Рабочий</PositionName>
         <LastName>Ivanov</LastName>
-        <FistName>Ivan</FistName>
+        <FirstName>Ivan</FirstName>
         <Patronymic>Ivanovich</Patronymic>
-        <DateOfBirth>2000-01-01</DateOfBirth>
+        <DateOfBirht>2000-01-01</DateOfBirht>
         <DateOfHiring>2004-01-01</DateOfHiring>
     </Employee>
     <Employee>
         <PositionName>Менеджер</PositionName>
         <LastName>Petrov</LastName>
-        <FistName>Ivan</FistName>
+        <FirstName>Ivan</FirstName>
         <Patronymic>Nikolaevich</Patronymic>
-        <DateOfBirth>2000-01-02</DateOfBirth>
+        <DateOfBirht>2000-01-02</DateOfBirht>
         <DateOfHiring>2005-01-01</DateOfHiring>
     </Employee>
     <Employee>
         <PositionName>Рабочий</PositionName>
         <LastName>Sokolova</LastName>
-        <FistName>Svetlana</FistName>
+        <FirstName>Svetlana</FirstName>
         <Patronymic>Sergeevna</Patronymic>
-        <DateOfBirth>2000-01-03</DateOfBirth>
+        <DateOfBirht>2000-01-03</DateOfBirht>
         <DateOfHiring>2002-01-01</DateOfHiring>
     </Employee>
     <Employee>
-        <id>7<id>
         <PositionName>Менеджер</PositionName>
         <LastName>Bobrov</LastName>
-        <FistName>Ivan</FistName>
+        <FirstName>Ivan</FirstName>
         <Patronymic>Ivanovich</Patronymic>
-        <DateOfBirth>2000-01-04</DateOfBirth>
+        <DateOfBirht>2000-01-04</DateOfBirht>
         <DateOfHiring>2000-01-01</DateOfHiring>
-        <open>
-          <id>2</id>
-        </open>
+        <SubmissedEmployes>
+            <Employee>
+                <PositionName>Рабочий</PositionName>
+                <LastName>Toropyshka</LastName>
+                <FirstName>Natalja</FirstName>
+                <Patronymic>Ivanovna</Patronymic>
+                <DateOfBirht>2000-01-05</DateOfBirht>
+                <DateOfHiring>2001-01-01</DateOfHiring>
+            </Employee>
+        </SubmissedEmployes>
     </Employee>
     <Employee>
         <PositionName>Рабочий</PositionName>
         <LastName>Toropyshka</LastName>
-        <FistName>Natalja</FistName>
+        <FirstName>Natalja</FirstName>
         <Patronymic>Ivanovna</Patronymic>
-        <DateOfBirth>2000-01-05</DateOfBirth>
+        <DateOfBirht>2000-01-05</DateOfBirht>
         <DateOfHiring>2001-01-01</DateOfHiring>
     </Employee>
     <Employee>
         <PositionName>Рабочий</PositionName>
         <LastName>Toropyshka</LastName>
-        <FistName>Natalja</FistName>
+        <FirstName>Natalja</FirstName>
         <Patronymic>Ivanovna</Patronymic>
-        <DateOfBirth>2000-01-09</DateOfBirth>
+        <DateOfBirht>2000-01-09</DateOfBirht>
         <DateOfHiring>2008-01-01</DateOfHiring>
     </Employee>
     <Employee>
         <PositionName>Директор</PositionName>
         <LastName>Sidozvogr</LastName>
-        <FistName>Nikolaj</FistName>
+        <FirstName>Nikolaj</FirstName>
         <Patronymic>Petrovich</Patronymic>
-        <DateOfBirth>2000-01-08</DateOfBirth>
+        <DateOfBirht>2000-01-08</DateOfBirht>
         <DateOfHiring>2009-01-01</DateOfHiring>
-        <open>
-            <PositionName>Менеджер</PositionName>
-            <LastName>Petrov</LastName>
-            <FistName>Ivan</FistName>
-            <Patronymic>Nikolaevich</Patronymic>
-            <DateOfBirth>2000-01-02</DateOfBirth>
-            <DateOfHiring>2005-01-01</DateOfHiring>
-            <PositionName>Менеджер</PositionName>
-            <LastName>Bobrov</LastName>
-            <FistName>Ivan</FistName>
-            <Patronymic>Ivanovich</Patronymic>
-            <DateOfBirth>2000-01-04</DateOfBirth>
-            <DateOfHiring>2000-01-01</DateOfHiring>
-        </open>
+        <SubmissedEmployes>
+            <Employee>
+                <PositionName>Менеджер</PositionName>
+                <LastName>Petrov</LastName>
+                <FirstName>Ivan</FirstName>
+                <Patronymic>Nikolaevich</Patronymic>
+                <DateOfBirht>2000-01-02</DateOfBirht>
+                <DateOfHiring>2005-01-01</DateOfHiring>
+            </Employee>
+            <Employee>
+                <PositionName>Менеджер</PositionName>
+                <LastName>Bobrov</LastName>
+                <FirstName>Ivan</FirstName>
+                <Patronymic>Ivanovich</Patronymic>
+                <DateOfBirht>2000-01-04</DateOfBirht>
+                <DateOfHiring>2000-01-01</DateOfHiring>
+            </Employee>
+        </SubmissedEmployes>
     </Employee>
     <Employee>
         <PositionName>Менеджер</PositionName>
         <LastName>Petrov</LastName>
-        <FistName>Ivan</FistName>
+        <FirstName>Ivan</FirstName>
         <Patronymic>Nikolaevich</Patronymic>
-        <DateOfBirth>2000-01-01</DateOfBirth>
+        <DateOfBirht>2000-01-01</DateOfBirht>
         <DateOfHiring>2010-01-01</DateOfHiring>
     </Employee>
     <Employee>
         <PositionName>Менеджер</PositionName>
         <LastName>Bobrov</LastName>
-        <FistName>Ivan</FistName>
+        <FirstName>Ivan</FirstName>
         <Patronymic>Ivanovich</Patronymic>
-        <DateOfBirth>2000-04-01</DateOfBirth>
+        <DateOfBirht>2000-04-01</DateOfBirht>
         <DateOfHiring>2000-06-01</DateOfHiring>
     </Employee>
     <Employee>
         <PositionName>Уборщик</PositionName>
         <LastName>Siskina</LastName>
-        <FistName>Nina</FistName>
+        <FirstName>Nina</FirstName>
         <Patronymic>Olegovna</Patronymic>
-        <DateOfBirth>2000-01-06</DateOfBirth>
+        <DateOfBirht>2000-01-06</DateOfBirht>
         <DateOfHiring>2000-07-01</DateOfHiring>
     </Employee>
     <Employee>
         <PositionName>Рабочий</PositionName>
         <LastName>Burzhin</LastName>
-        <FistName>Petr</FistName>
+        <FirstName>Petr</FirstName>
         <Patronymic>Kovanovich</Patronymic>
-        <DateOfBirth>2000-08-01</DateOfBirth>
+        <DateOfBirht>2000-08-01</DateOfBirht>
         <DateOfHiring>2000-06-01</DateOfHiring>
     </Employee>
     <Employee>
         <PositionName>Рабочий</PositionName>
         <LastName>wert</LastName>
-        <FistName>wsx</FistName>
+        <FirstName>wsx</FirstName>
         <Patronymic>cde</Patronymic>
-        <DateOfBirth>2000-03-01</DateOfBirth>
+        <DateOfBirht>2000-03-01</DateOfBirht>
         <DateOfHiring>2000-03-01</DateOfHiring>
     </Employee>
 </ONE>

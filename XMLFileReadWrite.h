@@ -36,5 +36,6 @@ public:
 	bool readDateElem(QXmlStreamReader& xml, const char* name, QDate& filed);
 
 	//      submiised, manager
+	
 	std::map< QString, QString > submissedToMananger;
 };
