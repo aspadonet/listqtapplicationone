@@ -22,7 +22,7 @@ protected:
 public:
 	
 	Employee2(const QString& lastName, Position* pos, const QString& firstName, QString patronymic, const QDate& DateOfBirth, const QDate& DateOfHiring);
-
+	Employee2(long& Id, const QString& lastName, Position* pos, const QString& firstName, QString patronymic, const QDate& DateOfBirth, const QDate& DateOfHiring);
 	QString GetLastName();
 	QString GetFirstName();
 	QString GetPatronymic();
@@ -30,6 +30,8 @@ public:
 	QDate GetDateOfHiring();
 	QString GetPositionName();
 	void SetPositionName(Position* pos);
+	void SetId(long& Id);
+	long GetId();
 	void SetEdit(const QString& lastName,  const QString& firstName, QString patronymic, const QDate& DateOfBirth, const QDate& DateOfHiring);
 	std::vector<Employee2*>  GetLeaderBehavior();
 

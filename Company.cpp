@@ -334,7 +334,7 @@ int Company2::GetEmployeesCount()
 }
 ////void ComponyConsole::PrintLeaderBehavior(std::vector<Employee2*>  Employee)
 ////{
-////	std::cout << "список  сотрудников привязыных к менеджеру" << std::endl;
+////	std::cout << "список  сотрудников привязыных к Managerу" << std::endl;
 ////	std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
 ////	std::cout << std::endl;
 ////
@@ -350,7 +350,7 @@ int Company2::GetEmployeesCount()
 //
 //void ComponyConsole::PrintSubmissedList( LeaderBehavior* leader )
 //{
-//  std::cout << "список  сотрудников привязыных к менеджеру" << std::endl;
+//  std::cout << "список  сотрудников привязыных к Managerу" << std::endl;
 //  std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
 //  std::cout << std::endl;
 //
@@ -402,7 +402,7 @@ int Company2::GetEmployeesCount()
 //{
 //
 //	std::string LastName;
-//	std::cout << " Фамилия Менеджера" << std::endl;
+//	std::cout << " Фамилия Managerа" << std::endl;
 //	std::cin >> LastName;
 //
 //	return LastName;
@@ -414,9 +414,9 @@ int Company2::GetEmployeesCount()
 //	
 //	std::cout << "Выберите действие: ... " << std::endl;
 //	std::cout << " 1 - добавить рабочего" << std::endl;
-//	std::cout << " 2 - добавить менеджера" << std::endl;
+//	std::cout << " 2 - добавить Managerа" << std::endl;
 //	std::cout << " 3 - добавить руководителя" << std::endl;
-//	std::cout << " 4 - добавить уборщика" << std::endl;
+//	std::cout << " 4 - добавить Cleanerа" << std::endl;
 //	std::cout << " 7 - Выход" << std::endl;
 //
 //	char ch;
@@ -461,9 +461,9 @@ int Company2::GetEmployeesCount()
 //
 //	std::cout << "Выберите действие: ... " << std::endl;
 //	std::cout << " 1 - добавить рабочего" << std::endl;
-//	std::cout << " 2 - добавить менеджера" << std::endl;
+//	std::cout << " 2 - добавить Managerа" << std::endl;
 //	std::cout << " 3 - добавить руководителя" << std::endl;
-//	std::cout << " 4 - добавить уборщика" << std::endl;
+//	std::cout << " 4 - добавить Cleanerа" << std::endl;
 //	std::cout << " 7 - Выход" << std::endl;
 //
 //	char ch;
@@ -578,19 +578,19 @@ void File2::ReadEmplyeesList(Company2& company, std::string strpath)
 
 				Position* pos = nullptr;
 
-				if ("Рабочий" == ch)
+				if ("Worker" == ch)
 				{
 					pos = new WorkerPosition();
 				}
-				else if ("Менеджер" == ch)
+				else if ("Manager" == ch)
 				{
 					pos = new ManagerPosition();
 				}
-				else if ("Директор" == ch)
+				else if ("Director" == ch)
 				{
 					pos = new DirectorPosition();
 				}
-				else if ("Уборщик" == ch)
+				else if ("Cleaner" == ch)
 				{
 					pos = new CleanerPosition();
 				}

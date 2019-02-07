@@ -13,6 +13,17 @@ Employee2::Employee2(const QString& lastName, Position* pos, const QString& firs
 	DateOfHiring = dateOfHiring;
 }
 
+Employee2::Employee2(long & Id, const QString & lastName, Position * pos, const QString & firstName, QString patronymic, const QDate & dateOfBirth, const QDate & dateOfHiring)
+{
+	SetId(Id);
+	LastName = lastName;
+	SetPositionName(pos);
+	FirstName = firstName;
+	Patronymic = patronymic;
+	DateOfBirth = dateOfBirth;
+	DateOfHiring = dateOfHiring;
+}
+
 QString Employee2::GetLastName()
 {
 	return LastName;
@@ -58,6 +69,17 @@ void Employee2::SetEdit(const QString& lastName, const QString& firstName, QStri
 	DateOfBirth = dateOfBirth;
 	DateOfHiring = dateOfHiring;
 }
+
+void Employee2::SetId(long& id) 
+{
+	this->Id = id;
+}
+
+long Employee2::GetId()
+{
+	return Id;
+}
+
 
 
 void Employee2::SetPositionName(Position* newPos )

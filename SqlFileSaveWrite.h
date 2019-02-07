@@ -21,7 +21,7 @@ private:
 	Company2* companySql;
 	QFile* filexml;
 public:
-	SqlFileReadWrite(QFile* file, Company2* company);
+	SqlFileReadWrite(Company2* company);
 	void ReadSqlFile();
 	void WriteSqlFile();
 };

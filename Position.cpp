@@ -3,19 +3,19 @@
 
 Position* Position::Create(std::string posName)
 {
-	if ("Рабочий" == posName)
+	if ("Worker" == posName)
 	{
 		return new WorkerPosition();
 	}
-	else if ("Менеджер" == posName)
+	else if ("Manager" == posName)
 	{
 		return new ManagerPosition();
 	}
-	else if ("Директор" == posName)
+	else if ("Director" == posName)
 	{
 		return new DirectorPosition();
 	}
-	else if ("Уборщик" == posName)
+	else if ("Cleaner" == posName)
 	{
 		return new CleanerPosition();
 	}

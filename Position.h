@@ -20,23 +20,23 @@ public:
 class WorkerPosition : public Position
 {
 public:
-	virtual std::string GetName() override { return "Рабочий"; }
+	virtual std::string GetName() override { return "Worker"; }
 };
 
 class CleanerPosition : public Position
 {
 public:
-	virtual std::string GetName() override { return "Уборщик"; }
+	virtual std::string GetName() override { return "Cleaner"; }
 };
 
 class ManagerPosition : public LeaderPosition
 {
 public:
-	virtual std::string GetName() override { return "Менеджер"; }
+	virtual std::string GetName() override { return "Manager"; }
 };
 
 class DirectorPosition : public LeaderPosition
 {
 public:
-	virtual std::string GetName() override { return "Директор"; }
+	virtual std::string GetName() override { return "Director"; }
 };

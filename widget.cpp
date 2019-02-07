@@ -12,6 +12,7 @@
 #include "File.h"
 #include "Position.h"
 #include "XMLFileReadWrite.h"
+#include "SqlFileSaveWrite.h"
 #include "EmployeeDialog.h"
 #include "EditEmployeeDialog.h"
 #include "DeleteEmployeeDialog.h"
@@ -32,11 +33,11 @@ Widget::Widget(QWidget *parent)
 	btnAddEmployee = new QPushButton(QString::fromLocal8Bit("&добавить сотрудника"));
 	btnDelEmployee = new QPushButton(QString::fromLocal8Bit("&удалить сотрудника"));
 	btnChangePosition = new QPushButton(QString::fromLocal8Bit("&изменить тип сотрудника"));
-	btnAssociateEmployee = new QPushButton(QString::fromLocal8Bit("&привязывать сотрудника к менеджеру"));
+	btnAssociateEmployee = new QPushButton(QString::fromLocal8Bit("&привязывать сотрудника к Managerу"));
 	btnSortLastname = new QPushButton(QString::fromLocal8Bit("&сортировать список по фамилиям"));
 	btnSortDate = new QPushButton(QString::fromLocal8Bit("&сортировать датам принятия на работу"));
 	btnPrintEmployeeList = new QPushButton(QString::fromLocal8Bit("&вывести список работников"));
-	btnGetListAssociate = new QPushButton(QString::fromLocal8Bit("&вывести список работников привязаных к менеджеру"));
+	btnGetListAssociate = new QPushButton(QString::fromLocal8Bit("&вывести список работников привязаных к Managerу"));
 	btnExit = new QPushButton(QString::fromLocal8Bit("&Сохранить изменения и завершить работу"));
 
 	//QObject::connect(btnExit, &QPushButton::clicked, &a, &a::quit());
@@ -770,74 +771,16 @@ void Widget::SaveSqlFile()
 
 	//QFile file(filename);
 	//file.open(QIODevice::WriteOnly);
-	QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
-	dbase.setDatabaseName("mybd.sqlite");
-	if (!dbase.open()) {
-		
-	}
-	for (Employee2* emptemp : company2.GetEmployees())
-	{
-		int posId = 0;
-		{
-			QSqlQuery query(dbase);
+	SqlFileReadWrite sqlsave(&company2);
 
-			query.prepare("SELect id from positions where name = ?");
-			query.addBindValue(emptemp->GetPositionName());
-
-			query.next();
-			posId = query.value(0).toInt();
-		}
-
-		QSqlQuery query(dbase);
-		query.prepare("INSERT INTO EmployeeBd(PositionBd, lastNameBd , firstNameBd, patronymicBd, DateOfBirthBd, DateOfHiring)"
-			"VALUES (?, ?,?, ?, ?, ?)");
-		query.addBindValue(posId);
-		query.addBindValue(emptemp->GetLastName());
-		query.addBindValue(emptemp->GetFirstName());
-		query.addBindValue(emptemp->GetPatronymic());
-		query.addBindValue(emptemp->GetDateOfBirth());
-		query.addBindValue(emptemp->GetDateOfHiring());
-		query.exec();
-
-//		emptemp->SetId(query.lastInsertId());
-	}
-
-	for (Employee2* leaderEmp : company2.GetEmployees())
-	{
-//		LeaderBehavior* leader = leaderEmp->GetLeaderBehavior();
-//
-//		for (Employee2* childEmp : leader->getSubmissed())
-//		{
-//			QSqlQuery query(dbase);
-//			query.prepare("INSERT INTO LeaderBeh(ParentId, Childid)"
-//				"VALUES (?, ?)");
-//			query.addBindValue(leaderEmp->GetId());
-//			query.addBindValue(childEmp->GetId());
-//			query.exec();
-//		}
-	}
-
-
-	QSqlDatabase dsub = QSqlDatabase::addDatabase("QSQLITE");
-	dsub.setDatabaseName("leadbd.sqlite");
-	QSqlQuery quer(dsub);
-	if (!dbase.open()) {
-		QMessageBox msgBox;
-		msgBox.setWindowTitle("ERROR");
-		msgBox.setText(QString::fromLocal8Bit("ERROR"));
-		msgBox.exec();
-
-		return;
-	}
-	quer.prepare("INSERT INTO LeaderBehavior()" "VALUES (?, ?)");
-	quer.addBindValue(3);
-	quer.addBindValue(4);
-	quer.exec();
-
+	sqlsave.WriteSqlFile();
 
 }
 void Widget::ReadSqlFile()
 {
+	SqlFileReadWrite sqlread(&company2);
+
+	sqlread.ReadSqlFile();
 
 }
 
@@ -845,19 +788,19 @@ void Widget::tempFromFile(const QString& lastName, std::string ch, const QString
 {
 	Position* pos = nullptr;
 
-	if ("Рабочий" == ch)
+	if ("Worker" == ch)
 	{
 		pos = new WorkerPosition();
 	}
-	else if ("Менеджер" == ch)
+	else if ("Manager" == ch)
 	{
 		pos = new ManagerPosition();
 	}
-	else if ("Директор" == ch)
+	else if ("Director" == ch)
 	{
 		pos = new DirectorPosition();
 	}
-	else if ("Уборщик" == ch)
+	else if ("Cleaner" == ch)
 	{
 		pos = new CleanerPosition();
 	}

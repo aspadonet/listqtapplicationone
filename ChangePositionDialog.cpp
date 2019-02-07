@@ -48,10 +48,10 @@ ChangePositionDialog::ChangePositionDialog(std::vector< Employee2* > employees, 
 
 	plblPositionName = new QLabel(QString::fromLocal8Bit("Новая должность"));
 
-	lstPos << QString::fromLocal8Bit("Рабочий")
-		<< QString::fromLocal8Bit("Уборщик")
-		<< QString::fromLocal8Bit("Менеджер")
-		<< QString::fromLocal8Bit("Директор");
+	lstPos << QString::fromLocal8Bit("Worker")
+		<< QString::fromLocal8Bit("Cleaner")
+		<< QString::fromLocal8Bit("Manager")
+		<< QString::fromLocal8Bit("Director");
 	cboPos->addItems(lstPos);
 
 	canselBtn = new QPushButton("Cansel");
@@ -102,10 +102,10 @@ void ChangePositionDialog::onChange()
 	
 	qstrcboPos = cboPos->currentText();
 	
-	std::string stdWorker = "Рабочий";
-	std::string stdCleaner = "Уборщик";
-	std::string stdManager = "Менеджер";
-	std::string stdDirector = "Директор";
+	std::string stdWorker = "Worker";
+	std::string stdCleaner = "Cleaner";
+	std::string stdManager = "Manager";
+	std::string stdDirector = "Director";
 	
 	std::string stdpos = qstrcboPos.toLocal8Bit().constData();
 	

@@ -17,10 +17,10 @@ EditEmployeeDialog::EditEmployeeDialog(Employee2* emp, QWidget* parent)
 	cbo = new QComboBox();//186
 
 
-	QString q1 = QString::fromLocal8Bit("Рабочий");
-	QString q2 = QString::fromLocal8Bit("Уборщик");
-	QString q3 = QString::fromLocal8Bit("Менеджер");
-	QString q4 = QString::fromLocal8Bit("Директор");
+	QString q1 = QString::fromLocal8Bit("Worker");
+	QString q2 = QString::fromLocal8Bit("Cleaner");
+	QString q3 = QString::fromLocal8Bit("Manager");
+	QString q4 = QString::fromLocal8Bit("Director");
 
 	cbo->addItem(q1,q1);
 	cbo->addItem(q2,q2);
@@ -101,10 +101,10 @@ void EditEmployeeDialog::onOk()
 
 	qstrcbo = cbo->currentText();
 
-	std::string stdWorker = "Рабочий";
-	std::string stdCleaner = "Уборщик";
-	std::string stdManager = "Менеджер";
-	std::string stdDirector = "Директор";
+	std::string stdWorker = "Worker";
+	std::string stdCleaner = "Cleaner";
+	std::string stdManager = "Manager";
+	std::string stdDirector = "Director";
 	std::string stdpos = qstrcbo.toLocal8Bit().constData();
 	if (empl->GetPositionName() != qstrcbo)
 	{

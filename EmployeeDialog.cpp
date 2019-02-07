@@ -14,10 +14,10 @@ EmployeeDialog::EmployeeDialog(QWidget* parent)
 	
 	cbo = new QComboBox();//186
 	
-	lst << QString::fromLocal8Bit("Рабочий")
-		<< QString::fromLocal8Bit("Уборщик")
-		<< QString::fromLocal8Bit("Менеджер")
-		<< QString::fromLocal8Bit("Директор");
+	lst << QString::fromLocal8Bit("Worker")
+		<< QString::fromLocal8Bit("Cleaner")
+		<< QString::fromLocal8Bit("Manager")
+		<< QString::fromLocal8Bit("Director");
 	
 	cbo->addItems(lst);
 	
@@ -85,10 +85,10 @@ void EmployeeDialog::onOk()
 	
 	qstrcbo= cbo->currentText();
 	
-	std::string stdWorker = "Рабочий";
-	std::string stdCleaner = "Уборщик";
-	std::string stdManager = "Менеджер";
-	std::string stdDirector = "Директор";
+	std::string stdWorker = "Worker";
+	std::string stdCleaner = "Cleaner";
+	std::string stdManager = "Manager";
+	std::string stdDirector = "Director";
 	std::string stdpos = qstrcbo.toLocal8Bit().constData();
 	
 	if (stdpos == stdWorker)

@@ -14,7 +14,7 @@ GetListAssociateAnEmployeeWithAManagerDialog::GetListAssociateAnEmployeeWithAMan
 {
 	vBxoLayouot = new QVBoxLayout();
 	
-	plblText = new QLabel(QString::fromLocal8Bit("Выберите менеджера"));
+	plblText = new QLabel(QString::fromLocal8Bit("Выберите Managerа"));
 	
 	//std::vector< Employee2* > emplyeesVec = company2.GetEmployees();
 	
